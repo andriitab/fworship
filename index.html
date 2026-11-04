@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F.Worship | Внутрішній Дашборд</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        stage: {
+                            black: '#0d0d0f',
+                            card: '#16161a',
+                            hover: '#202026',
+                            border: '#2a2a32',
+                            yellow: '#ffcc00',
+                            yellowDark: '#e6b800',
+                            yellowGlow: 'rgba(255, 204, 0, 0.15)',
+                            textLight: '#f0f0f3',
+                            textMuted: '#a0a0ab'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0d0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a32;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffcc00;
+        }
+        .yellow-glow {
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.12);
+        }
+        .yellow-glow-sm {
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.1);
+        }
+        .transition-custom {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-stage-black text-stage-textLight font-sans antialiased min-h-screen flex flex-col selection:bg-stage-yellow selection:text-black">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-stage-black/90 backdrop-blur-md border-b border-stage-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-3 cursor-pointer shrink-0" onclick="goToRoot()">
+                <div class="w-10 h-10 rounded-xl bg-stage-yellow flex items-center justify-center text-black font-extrabold text-xl shadow-md shadow-stage-yellow/20 overflow-hidden">
+                    <img src="logo.png" alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-wider text-white">F.<span class="text-stage-yellow">Worship</span></span>
+                    <span class="block text-xs text-stage-textMuted uppercase tracking-widest font-semibold">Група прославлення</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav (Aligned Right) -->
+            <div class="hidden md:flex items-center justify-end flex-1 space-x-6">
+                <nav class="flex items-center space-x-1 lg:space-x-2">
+                    <a href="#about" class="px-4 py-2 rounded-lg text-sm font-medium hover:text-stage-yellow hover:bg-stage-card transition-custom">Про нас</a>
+                    <a href="#repertoire" onclick="goToRoot()" class="px-4 py-2 rounded-lg text-sm font-medium hover:text-stage-yellow hover:bg-stage-card transition-custom">Репертуар</a>
+                    <a href="#gallery" class="px-4 py-2 rounded-lg text-sm font-medium hover:text-stage-yellow hover:bg-stage-card transition-custom">Галерея</a>
+                </nav>
+
+                <!-- Quick Action Links (Drive & Messenger) -->
+                <div class="flex items-center space-x-3">
+                    <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" rel="noopener noreferrer" 
+                       class="flex items-center space-x-2 px-3.5 py-2 rounded-lg border border-stage-border bg-stage-card text-stage-textLight hover:border-stage-yellow/50 hover:text-stage-yellow text-sm font-medium transition-custom">
+                        <i class="fa-brands fa-google-drive text-stage-yellow"></i>
+                        <span>Google Диск</span>
+                    </a>
+                    <a href="#" onclick="openMessengerModal(event)" 
+                       class="flex items-center space-x-2 px-3.5 py-2 rounded-lg bg-stage-yellow text-black hover:bg-stage-yellowDark text-sm font-bold shadow-md shadow-stage-yellow/10 transition-custom">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>Чат</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg border border-stage-border text-stage-textMuted hover:text-white hover:bg-stage-card focus:outline-none">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-b border-stage-border bg-stage-card px-4 pt-2 pb-4 space-y-2">
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-stage-hover hover:text-stage-yellow">Про нас</a>
+            <a href="#repertoire" onclick="goToRoot()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-stage-hover hover:text-stage-yellow">Репертуар</a>
+            <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-stage-hover hover:text-stage-yellow">Галерея</a>
+            <div class="pt-2 flex flex-col space-y-2">
+                <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" class="w-full text-center py-2 rounded-lg border border-stage-border bg-stage-black text-stage-textLight hover:text-stage-yellow">
+                    <i class="fa-brands fa-google-drive text-stage-yellow mr-2"></i>Google Диск
+                </a>
+                <a href="#" onclick="openMessengerModal(event)" class="w-full text-center py-2 rounded-lg bg-stage-yellow text-black font-bold">
+                    <i class="fa-solid fa-comments mr-2"></i>Чат гурту
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- 1. SECTION: ABOUT US -->
+        <section id="about" class="relative rounded-2xl bg-stage-card border border-stage-border p-6 sm:p-10 yellow-glow overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-stage-yellow/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                <!-- Text Content & Counters (Left) -->
+                <div class="space-y-4 flex-1">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-stage-yellow/30 bg-stage-yellow/10 text-stage-yellow text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid fa-bolt text-xs"></i>
+                        <span>Внутрішня базова інформація</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Робочий простір групи прославлення F.Worship
+                    </h1>
+                    <p class="text-stage-textMuted text-base sm:text-lg leading-relaxed">
+                        Вітаємо на нашій командній платформі! Тут зібрані всі актуальні розклади репетицій, концертний репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-4 text-xs sm:text-sm text-stage-textMuted">
+                        <div class="flex items-center space-x-2 bg-stage-black/50 px-3 py-1.5 rounded-lg border border-stage-border">
+                            <i class="fa-solid fa-music text-stage-yellow"></i>
+                            <span>Пісень у базі: <strong class="text-white" id="songCount">0</strong></span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-stage-black/50 px-3 py-1.5 rounded-lg border border-stage-border">
+                            <i class="fa-solid fa-folder text-stage-yellow"></i>
+                            <span>Розділів: <strong class="text-white" id="statSectionCount">0</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Широкоформатне фото гурту (16:9) справа -->
+                <div class="w-full md:w-80 aspect-video shrink-0 rounded-2xl overflow-hidden border border-stage-border bg-stage-black shadow-lg">
+                    <img src="team1.png" alt="Команда F.Worship" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SECTION: REPERTOIRE / SONGS & FOLDERS -->
+        <section id="repertoire" class="space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-stage-yellow/10 border border-stage-yellow/30 text-stage-yellow flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-music text-sm"></i>
+                        </div>
+                        <span>Репертуар і матеріали</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-stage-textMuted mt-1 ml-11">Тексти, акорди та тональності. Синхронізовано з Google Диском.</p>
+                </div>
+
+                <!-- Controls: Search -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-stage-textMuted text-xs"></i>
+                        <input type="text" id="searchInput" placeholder="Пошук пісні або файлу..." oninput="handleSearch()"
+                               class="w-full sm:w-64 pl-9 pr-3.5 py-1.5 rounded-lg bg-stage-card border border-stage-border text-xs sm:text-sm text-white placeholder-stage-textMuted focus:outline-none focus:border-stage-yellow transition-custom">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Breadcrumb Navigation Bar -->
+            <div id="navigationBar" class="navigation-bar items-center justify-between bg-stage-card border border-stage-border px-4 py-2.5 rounded-lg" style="display: none;">
+                <button class="btn-back flex items-center space-x-2 text-xs font-medium text-stage-yellow hover:text-white transition-custom" onclick="goBackFolder()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Назад</span>
+                </button>
+                <div class="breadcrumb flex items-center space-x-2 text-xs text-stage-textMuted">
+                    <button onclick="goToRoot()" class="hover:text-stage-yellow">Головна</button>
+                    <span>/</span>
+                    <span id="currentFolderTitle" class="text-white font-semibold"></span>
+                </div>
+            </div>
+
+            <!-- Subfolders Grid Container -->
+            <div id="foldersContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+
+            <!-- Root / Folder Files Container -->
+            <div id="rootFilesContainer" style="display: none;"></div>
+
+            <!-- Songs List Container (COMPACT DESIGN & ULTRA-COMPACT ON MOBILE) -->
+            <div class="rounded-xl bg-stage-card border border-stage-border overflow-hidden shadow-lg">
+                <div class="hidden md:grid grid-cols-12 px-5 py-2.5 border-b border-stage-border text-xs font-semibold uppercase tracking-wider text-stage-textMuted bg-stage-black/40">
+                    <div class="col-span-6">Назва пісні</div>
+                    <div class="col-span-2">Тональність</div>
+                    <div class="col-span-2">Матеріали</div>
+                    <div class="col-span-2 text-right">Дії / Диск</div>
+                </div>
+
+                <div id="songList" class="divide-y divide-stage-border">
+                    <div style="text-align: center; padding: 1.5rem; color: var(--text-muted);" class="text-xs">⏳ Завантаження репертуару...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SECTION: PHOTO GALLERY (4 COMPACT 16:9 CARDS IN A ROW) -->
+        <section id="gallery" class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-stage-yellow/10 border border-stage-yellow/30 text-stage-yellow flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-images text-sm"></i>
+                        </div>
+                        <span>Фотоальбом</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-stage-textMuted mt-1 ml-11">Широкоформатні фотографії з наших виступів та репетицій</p>
+                </div>
+            </div>
+
+            <!-- Photo Grid (4 in a row on desktops: md:grid-cols-4) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3" id="galleryGrid">
+                <!-- Фото 1 -->
+                <div class="aspect-video w-full relative group rounded-xl overflow-hidden bg-stage-card border border-stage-border cursor-pointer yellow-glow-sm" onclick="openLightbox('https://picsum.photos/1280/720?random=1', 'Репетиція')">
+                    <img src="https://picsum.photos/640/360?random=1" alt="Репетиція" class="w-full h-full object-cover group-hover:scale-105 transition-custom duration-500">
+                </div>
+                <!-- Фото 2 -->
+                <div class="aspect-video w-full relative group rounded-xl overflow-hidden bg-stage-card border border-stage-border cursor-pointer yellow-glow-sm" onclick="openLightbox('https://picsum.photos/1280/720?random=2', 'Репетиція')">
+                    <img src="https://picsum.photos/640/360?random=2" alt="Репетиція" class="w-full h-full object-cover group-hover:scale-105 transition-custom duration-500">
+                </div>
+                <!-- Фото 3 -->
+                <div class="aspect-video w-full relative group rounded-xl overflow-hidden bg-stage-card border border-stage-border cursor-pointer yellow-glow-sm" onclick="openLightbox('https://picsum.photos/1280/720?random=3', 'Бекстейдж')">
+                    <img src="https://picsum.photos/640/360?random=3" alt="Бекстейдж" class="w-full h-full object-cover group-hover:scale-105 transition-custom duration-500">
+                </div>
+                <!-- Фото 4 -->
+                <div class="aspect-video w-full relative group rounded-xl overflow-hidden bg-stage-card border border-stage-border cursor-pointer yellow-glow-sm" onclick="openLightbox('https://picsum.photos/1280/720?random=4', 'Сцена')">
+                    <img src="https://picsum.photos/640/360?random=4" alt="Сцена" class="w-full h-full object-cover group-hover:scale-105 transition-custom duration-500">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 border-t border-stage-border bg-stage-card py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-stage-yellow flex items-center justify-center text-black font-bold overflow-hidden">
+                    <img src="logo.png" alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="text-base font-bold text-white tracking-wider">F.<span class="text-stage-yellow">Worship</span></span>
+            </div>
+
+            <p class="text-xs text-stage-textMuted text-center">
+                &copy; 2026 Внутрішній простір групи прославлення F.Worship. Усі права захищено.
+            </p>
+
+            <div class="flex items-center space-x-3">
+                <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" class="w-8 h-8 rounded-lg border border-stage-border bg-stage-black text-stage-textMuted hover:text-stage-yellow hover:border-stage-yellow/50 flex items-center justify-center transition-custom" title="Google Диск">
+                    <i class="fa-brands fa-google-drive text-xs"></i>
+                </a>
+                <a href="#" onclick="openMessengerModal(event)" class="w-8 h-8 rounded-lg border border-stage-border bg-stage-black text-stage-textMuted hover:text-stage-yellow hover:border-stage-yellow/50 flex items-center justify-center transition-custom" title="Чат групи">
+                    <i class="fa-solid fa-comments text-xs"></i>
+                </a>
+                <a href="#about" class="w-8 h-8 rounded-lg border border-stage-border bg-stage-black text-stage-textMuted hover:text-stage-yellow hover:border-stage-yellow/50 flex items-center justify-center transition-custom" title="Нагору">
+                    <i class="fa-solid fa-arrow-up text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: LIGHTBOX PHOTO VIEWER -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 w-10 h-10 rounded-full border border-stage-border bg-stage-card text-white hover:text-stage-yellow flex items-center justify-center text-xl z-10">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-5xl max-h-[85vh] relative flex flex-col items-center">
+            <img id="lightboxImage" src="" alt="Full view" class="max-w-full max-h-[75vh] object-contain rounded-lg border border-stage-border">
+            <p id="lightboxCaption" class="mt-4 text-sm text-stage-textMuted text-center font-medium"></p>
+        </div>
+    </div>
+
+    <!-- MODAL 2: MESSENGER QUICK LINK INFO -->
+    <div id="messengerModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-stage-card border border-stage-border rounded-2xl max-w-md w-full p-6 space-y-4 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-stage-yellow/10 border border-stage-yellow/30 text-stage-yellow flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Робочий чат групи F.Worship</h3>
+            <p class="text-sm text-stage-textMuted leading-relaxed">
+                Розділ "Чат гурту" знаходиться в розробці.
+            </p>
+            <div class="pt-2">
+                <button onclick="closeMessengerModal()" class="w-full py-2.5 rounded-xl bg-stage-yellow text-black font-bold hover:bg-stage-yellowDark transition-custom text-sm">
+                    Закрити
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION LOGIC (JS) -->
+    <script>
+        const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzXiVb15oFxKX-abXvHN45YL1QJQanblfWA2mlzWPHrW_zZn1u0nya97A8hPZxEwsBlCg/exec';
+
+        let rootData = null;
+        let currentFolder = null;
+
+        // --- 1. INITIALIZATION & STORAGE SYNC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('popstate', (event) => {
+                if (event.state && event.state.folderId) {
+                    let found = findFolderById(rootData, event.state.folderId);
+                    if (found) {
+                        currentFolder = found;
+                        renderCurrentFolder(false);
+                    }
+                } else if (rootData) {
+                    currentFolder = rootData;
+                    renderCurrentFolder(false);
+                }
+            });
+
+            fetchRepertoire();
+        });
+
+        const LOCAL_STORAGE_KEY = 'BAND_REPERTOIRE_LOCAL_CACHE_V1';
+
+        async function fetchRepertoire() {
+            // Instant load from localStorage
+            const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (localData) {
+                try {
+                    rootData = JSON.parse(localData);
+                    sortDataAlphabetically(rootData); // Автоматичне сортування за алфавітом
+                    currentFolder = rootData;
+                    checkUrlFolderPosition();
+                    renderCurrentFolder(false);
+                    updateCounters();
+                } catch (e) {
+                    console.error('Помилка читання LocalStorage:', e);
+                }
+            }
+
+            // Background fetch for fresh data
+            try {
+                const response = await fetch(`${GAS_WEB_APP_URL}?refresh=true`);
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    const freshData = result.data;
+                    sortDataAlphabetically(freshData); // Автоматичне сортування за алфавітом
+                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(freshData));
+                    rootData = freshData;
+                    
+                    if (currentFolder && currentFolder.id !== 'root') {
+                        let targetFolder = findFolderById(rootData, currentFolder.id);
+                        currentFolder = targetFolder ? targetFolder : rootData;
+                    } else {
+                        currentFolder = rootData;
+                    }
+
+                    renderCurrentFolder(false);
+                    updateCounters();
+                }
+            } catch (e) {
+                console.error('Помилка фонового оновлення з мережі:', e);
+                if (!rootData) loadMockData();
+            }
+        }
+
+        // Функція рекурсивного сортування папок та пісень за алфавітом (А-Я)
+        function sortDataAlphabetically(folder) {
+            if (folder.songs && Array.isArray(folder.songs)) {
+                folder.songs.sort((a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true }));
+            }
+            if (folder.subfolders && Array.isArray(folder.subfolders)) {
+                folder.subfolders.sort((a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true }));
+                folder.subfolders.forEach(sub => sortDataAlphabetically(sub));
+            }
+        }
+
+        function checkUrlFolderPosition() {
+            const params = new URLSearchParams(window.location.search);
+            const folderId = params.get('folder');
+            if (folderId && rootData) {
+                let target = findFolderById(rootData, folderId);
+                if (target) currentFolder = target;
+            }
+        }
+
+        function loadMockData() {
+            rootData = {
+                id: "root",
+                name: "Головна",
+                files: [{ name: "Загальні ноти.pdf", driveUrl: "#" }],
+                subfolders: [
+                    {
+                        id: "sub1",
+                        name: "Концертний сет",
+                        files: [{ name: "План концерту.docx", driveUrl: "#" }],
+                        subfolders: [],
+                        songs: [
+                            { name: "Ти — моя міцна скала", key: "Am", chords: "Am F C G", text: "Текст...", driveUrl: "#" }
+                        ]
+                    }
+                ],
+                songs: []
+            };
+            sortDataAlphabetically(rootData);
+            currentFolder = rootData;
+            renderCurrentFolder(false);
+            updateCounters();
+        }
+
+        function updateCounters() {
+            if (!rootData) return;
+            let totalSongs = countAllSongs(rootData);
+            let totalSections = rootData.subfolders ? rootData.subfolders.length : 0;
+            
+            const songElem = document.getElementById('songCount');
+            const sectionElem = document.getElementById('statSectionCount');
+
+            if (songElem) songElem.innerText = totalSongs;
+            if (sectionElem) sectionElem.innerText = totalSections;
+        }
+
+        function countAllSongs(folder) {
+            let count = folder.songs ? folder.songs.length : 0;
+            if (folder.subfolders) {
+                folder.subfolders.forEach(sub => count += countAllSongs(sub));
+            }
+            return count;
+        }
+
+        // --- 2. RENDER FOLDERS & SONGS (ULTRA-COMPACT MOBILE PADDING) ---
+        function renderCurrentFolder(pushToHistory = true) {
+            const foldersContainer = document.getElementById('foldersContainer');
+            const rootFilesContainer = document.getElementById('rootFilesContainer');
+            const navBar = document.getElementById('navigationBar');
+
+            if (currentFolder === rootData) {
+                navBar.style.display = 'none';
+                if (pushToHistory) {
+                    history.pushState({}, '', window.location.pathname);
+                }
+            } else {
+                navBar.style.display = 'flex';
+                document.getElementById('currentFolderTitle').innerText = currentFolder.name;
+                if (pushToHistory) {
+                    history.pushState({ folderId: currentFolder.id }, '', `?folder=${currentFolder.id}`);
+                }
+            }
+
+            if (currentFolder.subfolders && currentFolder.subfolders.length > 0) {
+                foldersContainer.innerHTML = currentFolder.subfolders.map((sub) => `
+                    <div class="folder-card bg-stage-card border border-stage-border rounded-lg p-2.5 sm:p-3 cursor-pointer hover:border-stage-yellow transition-custom flex items-center space-x-2.5" onclick="openSubfolder('${sub.id}')">
+                        <span class="text-stage-yellow text-base sm:text-lg">📂</span>
+                        <span class="font-medium text-xs sm:text-sm text-white">${sub.name}</span>
+                    </div>
+                `).join('');
+                foldersContainer.style.display = 'grid';
+            } else {
+                foldersContainer.innerHTML = '';
+                foldersContainer.style.display = 'none';
+            }
+
+            if (currentFolder.files && currentFolder.files.length > 0) {
+                rootFilesContainer.innerHTML = `
+                    <div class="files-container bg-stage-card/50 border border-stage-border border-dashed p-2.5 sm:p-3 rounded-lg mb-3">
+                        <div class="files-title text-[10px] font-semibold text-stage-textMuted uppercase mb-2">📎 Долучені файли матеріалів:</div>
+                        <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                            ${currentFolder.files.map(f => `<a href="${f.driveUrl}" target="_blank" class="file-chip inline-flex items-center space-x-1.5 bg-stage-card border border-stage-border px-2.5 py-1 rounded text-xs text-stage-yellow hover:border-stage-yellow transition-custom">📄 ${f.name} ↗</a>`).join('')}
+                        </div>
+                    </div>
+                `;
+                rootFilesContainer.style.display = 'block';
+            } else {
+                rootFilesContainer.innerHTML = '';
+                rootFilesContainer.style.display = 'none';
+            }
+
+            renderSongs(currentFolder.songs || []);
+        }
+
+        function openSubfolder(folderId) {
+            let nextFolder = findFolderById(rootData, folderId);
+            if (nextFolder) {
+                currentFolder = nextFolder;
+                renderCurrentFolder(true);
+            }
+        }
+
+        function goBackFolder() {
+            window.history.back();
+        }
+
+        function goToRoot() {
+            if (rootData) {
+                currentFolder = rootData;
+                renderCurrentFolder(true);
+                document.getElementById('searchInput').value = '';
+            }
+        }
+
+        function findFolderById(folder, id) {
+            if (folder.id === id) return folder;
+            if (folder.subfolders) {
+                for (let sub of folder.subfolders) {
+                    let found = findFolderById(sub, id);
+                    if (found) return found;
+                }
+            }
+            return null;
+        }
+
+        function renderSongs(songs) {
+            const container = document.getElementById('songList');
+            if (!songs || songs.length === 0) {
+                if (!currentFolder.subfolders || currentFolder.subfolders.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; padding: 1.2rem; color: var(--text-muted);" class="text-xs">Папка порожня</div>';
+                } else {
+                    container.innerHTML = '';
+                }
+                return;
+            }
+
+            container.innerHTML = songs.map((song, index) => {
+                let songFilesHtml = '';
+                if (song.files && song.files.length > 0) {
+                    songFilesHtml = `
+                        <div class="files-container mt-2 p-2 bg-stage-black/40 rounded border border-stage-border">
+                            <div class="files-title text-[10px] text-stage-textMuted uppercase mb-1">📎 Матеріали треку (мінуси, ноти):</div>
+                            <div class="flex flex-wrap gap-1">
+                                ${song.files.map(f => `<a href="${f.driveUrl}" target="_blank" class="file-chip inline-flex items-center space-x-1 bg-stage-card border border-stage-border px-2 py-0.5 rounded text-[11px] text-stage-yellow">🎵 ${f.name} ↗</a>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                let keyBadge = song.key ? `<span class="song-key-badge px-2 py-0.5 rounded bg-stage-black border border-stage-border text-[11px] font-mono font-bold text-stage-yellow">${song.key}</span>` : '';
+
+                return `
+                    <div class="song-item group">
+                        <!-- Зменшені вертикальні відступи пісень для мобільних (py-2 замість py-2.5) -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 px-4 sm:px-5 py-2 items-center gap-1.5 sm:gap-2 hover:bg-stage-hover/50 cursor-pointer transition-custom" onclick="toggleSong(${index})">
+                            <div class="md:col-span-6 flex items-center space-x-2.5">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded bg-stage-yellow/10 border border-stage-yellow/30 text-stage-yellow flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-music text-[9px] sm:text-[10px]"></i>
+                                </div>
+                                <h4 class="text-xs sm:text-sm font-semibold text-white group-hover:text-stage-yellow transition-custom">${song.name}</h4>
+                            </div>
+
+                            <div class="md:col-span-2 flex items-center">
+                                ${keyBadge}
+                            </div>
+
+                            <div class="md:col-span-2 flex items-center text-[11px] text-stage-textMuted">
+                                <span>${song.chords ? '🎼 Акорди наявні' : 'Текст'}</span>
+                            </div>
+
+                            <div class="md:col-span-2 flex items-center justify-end space-x-2">
+                                <a href="${song.driveUrl}" target="_blank" onclick="event.stopPropagation()" class="p-1.5 rounded border border-stage-border text-stage-textMuted hover:text-stage-yellow hover:border-stage-yellow/50 transition-custom" title="Диск">
+                                    <i class="fa-brands fa-google-drive text-xs"></i>
+                                </a>
+                                <button class="p-1.5 text-stage-textMuted hover:text-white transition-custom">
+                                    <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-300" id="icon-${index}"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="song-body hidden bg-stage-black/60 border-t border-stage-border px-4 sm:px-5 py-3 text-xs space-y-2.5" id="song-body-${index}">
+                            ${songFilesHtml}
+                            <div class="song-content-text font-mono text-xs text-stage-textLight whitespace-pre-wrap leading-relaxed">${song.chords || song.text || 'Немає текстового вмісту'}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleSong(index) {
+            const body = document.getElementById(`song-body-${index}`);
+            const item = body.closest('.song-item');
+            item.classList.toggle('active');
+            body.classList.toggle('hidden');
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (!query) {
+                renderCurrentFolder(false);
+                return;
+            }
+
+            document.getElementById('foldersContainer').style.display = 'none';
+            document.getElementById('rootFilesContainer').style.display = 'none';
+            document.getElementById('navigationBar').style.display = 'none';
+
+            let allSongsList = [];
+            collectAllSongs(rootData, allSongsList);
+
+            // Фільтрація та збереження алфавітного порядку і при пошуку
+            const filtered = allSongsList.filter(s => 
+                s.name.toLowerCase().includes(query) || 
+                (s.chords && s.chords.toLowerCase().includes(query)) ||
+                (s.key && s.key.toLowerCase().includes(query))
+            ).sort((a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true }));
+
+            renderSongs(filtered);
+        }
+
+        function collectAllSongs(folder, list) {
+            if (folder.songs) folder.songs.forEach(s => list.push(s));
+            if (folder.subfolders) folder.subfolders.forEach(sub => collectAllSongs(sub, list));
+        }
+
+        // --- 3. GALLERY & MODALS ---
+        function openLightbox(imageSrc, caption) {
+            document.getElementById('lightboxImage').src = imageSrc;
+            document.getElementById('lightboxCaption').textContent = caption;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openMessengerModal(e) {
+            e.preventDefault();
+            document.getElementById('messengerModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMessengerModal() {
+            document.getElementById('messengerModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
