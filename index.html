@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Робоча станція музичного гурту</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0d;
+            --card-bg: #141418;
+            --card-hover: #1c1c22;
+            --accent-yellow: #ffcc00;
+            --accent-yellow-glow: rgba(255, 204, 0, 0.2);
+            --text-main: #f0f0f5;
+            --text-muted: #9999a6;
+            --border-color: #262630;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(11, 11, 13, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent-yellow);
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .btn-drive {
+            background-color: var(--accent-yellow);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        section {
+            margin-bottom: 3.5rem;
+        }
+
+        h2.section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-yellow);
+            padding-left: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .about-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .counters {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .counter-item .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-yellow);
+        }
+
+        .counter-item .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .navigation-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb button {
+            background: none;
+            border: none;
+            color: var(--accent-yellow);
+            cursor: pointer;
+            font: inherit;
+            padding: 0;
+        }
+
+        .btn-back {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: border-color 0.2s;
+        }
+
+        .btn-back:hover {
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
+
+        .folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .folder-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .folder-card:hover {
+            border-color: var(--accent-yellow);
+            background-color: var(--card-hover);
+        }
+
+        .files-container {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+        }
+
+        .files-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .file-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background-color: var(--card-hover);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--accent-yellow);
+            text-decoration: none;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .repertoire-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+        }
+
+        .song-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .song-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .song-header {
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .song-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .song-title {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .song-key-badge {
+            background-color: var(--accent-yellow-glow);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .song-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .song-body {
+            padding: 1.25rem;
+            background-color: #0f0f12;
+            border-top: 1px solid var(--border-color);
+            display: none;
+            font-size: 0.9rem;
+            color: #d0d0d8;
+        }
+
+        .song-content-text {
+            white-space: pre-wrap;
+            font-family: monospace;
+            margin-top: 0.75rem;
+        }
+
+        .song-item.active .song-body {
+            display: block;
+        }
+
+        /* Новини та галерея */
+        .news-wrapper { position: relative; }
+        .news-slider { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        @media (max-width: 768px) { .news-slider { grid-template-columns: 1fr; } }
+        .news-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; }
+        .news-tag { font-size: 0.75rem; background-color: var(--accent-yellow-glow); color: var(--accent-yellow); padding: 0.25rem 0.5rem; border-radius: 4px; align-self: flex-start; margin-bottom: 0.75rem; font-weight: 600; }
+        .news-card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: #fff; }
+        .news-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .news-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 0.75rem; }
+        .read-more { color: var(--accent-yellow); background: none; border: none; cursor: pointer; font-weight: 600; }
+        .slider-controls { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem; }
+        .slider-btn { background-color: var(--card-bg); border: 1px solid var(--border-color); color: #fff; width: 36px; height: 36px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        @media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        .gallery-item { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        footer { border-top: 1px solid var(--border-color); padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; background-color: var(--card-bg); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 1rem; }
+        .modal.open { display: flex; }
+        .modal-content { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; max-width: 600px; width: 100%; position: relative; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="goToRoot()">🎸 Band<span>Workspace</span></div>
+        <nav>
+            <a href="#about">ℹ️ Про нас</a>
+            <a href="#news">📰 Новини</a>
+            <a href="#repertoire" onclick="goToRoot()">🎵 Репертуар</a>
+            <a href="#gallery">📸 Галерея</a>
+            <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" id="driveLink" target="_blank" class="btn-drive">📁 Google Диск</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+<!-- Про нас -->
+<section id="about">
+    <h2 class="section-title">ℹ️ Про колектив</h2>
+    <div class="about-card">
+        <p>Внутрішня робоча станція нашого музичного колективу. Усі матеріали репетицій, плани виступів, актуальні тексти, акорди та фото — завжди під рукою в єдиному місці.</p>
+        
+        <!-- `[ОНОВЛЕНО]` Блок для фотографії гурту -->
+        <div class="about-image-wrap">
+            <img src="ІМЯ_ФАЙЛУ_АБО_ПОСИЛАННЯ.jpg" alt="Фото нашого музичного гурту" class="about-photo">
+        </div>
+
+        <div class="counters">
+            <div class="counter-item">
+                <div class="number" id="songCount">0</div>
+                <div class="label">🎵 Пісень у базі</div>
+            </div>
+            <div class="counter-item">
+                <div class="number">12</div>
+                <div class="label">📸 Фотографій</div>
+            </div>
+            <div class="counter-item">
+                <div class="number" id="sectionCount">0</div>
+                <div class="label">📂 Розділів</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Новини -->
+        <section id="news">
+            <h2 class="section-title">📰 Стрічка подій</h2>
+            <div class="news-wrapper">
+                <div class="news-slider" id="newsSlider">
+                    <div class="news-card">
+                        <div>
+                            <span class="news-tag">🎸 Репетиція</span>
+                            <h3>Звіт з репетиції</h3>
+                            <p>Сьогодні чудово попрацювали над новими аранжуваннями. Вивчили та зіграли композицію...</p>
+                        </div>
+                        <div class="news-footer">
+                            <span>🕒 Сьогодні</span>
+                            <button class="read-more" onclick="openNewsModal('Звіт з репетиції', 'Сьогодні чудово попрацювали над новими аранжуваннями. Вивчили та зіграли композицію.')">Читати повністю</button>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div>
+                            <span class="news-tag">📌 Оголошення</span>
+                            <h3>Підготовка до вечора</h3>
+                            <p>Увага всім учасникам! Наступного тижня готуємося до виступу...</p>
+                        </div>
+                        <div class="news-footer">
+                            <span>🕒 Вчора</span>
+                            <button class="read-more" onclick="openNewsModal('Підготовка до вечора', 'Увага всім учасникам! Наступного тижня готуємося до виступу.')">Читати повністю</button>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div>
+                            <span class="news-tag">🎉 Подія</span>
+                            <h3>День народження!</h3>
+                            <p>Щиро вітаємо нашого неперевершеного барабанщика!</p>
+                        </div>
+                        <div class="news-footer">
+                            <span>🕒 3 дні тому</span>
+                            <button class="read-more" onclick="openNewsModal('День народження!', 'Щиро вітаємо нашого неперевершеного барабанщика!')">Читати повністю</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn" onclick="scrollSlider(-1)">‹</button>
+                    <button class="slider-btn" onclick="scrollSlider(1)">›</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Репертуар -->
+        <section id="repertoire">
+            <h2 class="section-title">🎵 Репертуар і матеріали</h2>
+            
+            <div id="navigationBar" class="navigation-bar" style="display: none;">
+                <button class="btn-back" onclick="goBackFolder()">⬅ Назад</button>
+                <div class="breadcrumb">
+                    <button onclick="goToRoot()">Головна</button>
+                    <span>/</span>
+                    <span id="currentFolderTitle" style="color: #fff;"></span>
+                </div>
+            </div>
+
+            <div class="repertoire-controls">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Пошук пісні або файлу..." oninput="handleSearch()">
+            </div>
+
+            <div id="foldersContainer" class="folders-grid"></div>
+            <div id="rootFilesContainer" style="display: none;"></div>
+            <div class="song-list" id="songList">
+                <div style="text-align: center; padding: 2rem; color: var(--text-muted);">⏳ Завантаження з кешу...</div>
+            </div>
+        </section>
+
+        <!-- Галерея -->
+        <section id="gallery">
+            <h2 class="section-title">📸 Фотоальбом</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://picsum.photos/300/300?random=1" alt="Репетиція"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/300/300?random=2" alt="Репетиція"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/300/300?random=3" alt="Бекстейдж"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/300/300?random=4" alt="Сцена"></div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>🎸 Внутрішній простір гурту • Дані синхронізовані з Google Диском ☁️</p>
+    </footer>
+
+    <div class="modal" id="newsModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeNewsModal()">&times;</button>
+            <h3 id="modalTitle" style="margin-bottom: 1rem; color: #fff;"></h3>
+            <p id="modalText" style="color: var(--text-muted); line-height: 1.6;"></p>
+        </div>
+    </div>
+
+<script>
+    const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzXiVb15oFxKX-abXvHN45YL1QJQanblfWA2mlzWPHrW_zZn1u0nya97A8hPZxEwsBlCg/exec';
+
+    let rootData = null;
+    let currentFolder = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Слухаємо кнопку "Назад" у браузері
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.folderId) {
+                let found = findFolderById(rootData, event.state.folderId);
+                if (found) {
+                    currentFolder = found;
+                    renderCurrentFolder(false); // без створення нової історії
+                }
+            } else if (rootData) {
+                currentFolder = rootData;
+                renderCurrentFolder(false);
+            }
+        });
+
+        fetchRepertoire();
+    });
+
+    async function fetchRepertoire() {
+        try {
+            // Завантажуємо дані (працює миттєво завдяки кешу хмари)
+            const response = await fetch(GAS_WEB_APP_URL);
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                rootData = result.data;
+                currentFolder = rootData;
+                
+                // Перевіряємо, чи в URL є збережений стан папки
+                const params = new URLSearchParams(window.location.search);
+                const folderId = params.get('folder');
+                if (folderId) {
+                    let target = findFolderById(rootData, folderId);
+                    if (target) currentFolder = target;
+                }
+
+                renderCurrentFolder(false);
+                updateCounters();
+            }
+        } catch (e) {
+            console.error('Помилка завантаження:', e);
+            loadMockData();
+        }
+    }
+
+    function loadMockData() {
+        rootData = {
+            id: "root",
+            name: "Головна",
+            files: [{ name: "Загальні ноти.pdf", driveUrl: "#" }],
+            subfolders: [
+                {
+                    id: "sub1",
+                    name: "Концертний сет",
+                    files: [{ name: "План концерту.docx", driveUrl: "#" }],
+                    subfolders: [],
+                    songs: [
+                        { name: "Ти — моя міцна скала", key: "Am", chords: "Am F C G", text: "Текст...", driveUrl: "#" }
+                    ]
+                }
+            ],
+            songs: []
+        };
+        currentFolder = rootData;
+        renderCurrentFolder(false);
+        updateCounters();
+    }
+
+    function updateCounters() {
+        let totalSongs = countAllSongs(rootData);
+        let totalSections = rootData.subfolders ? rootData.subfolders.length : 0;
+        document.getElementById('songCount').innerText = totalSongs;
+        document.getElementById('sectionCount').innerText = totalSections;
+    }
+
+    function countAllSongs(folder) {
+        let count = folder.songs ? folder.songs.length : 0;
+        if (folder.subfolders) {
+            folder.subfolders.forEach(sub => count += countAllSongs(sub));
+        }
+        return count;
+    }
+
+    // Рендеринг поточної папки. pushState = true записує історію для браузера
+    function renderCurrentFolder(pushToHistory = true) {
+        const foldersContainer = document.getElementById('foldersContainer');
+        const rootFilesContainer = document.getElementById('rootFilesContainer');
+        const navBar = document.getElementById('navigationBar');
+
+        if (currentFolder === rootData) {
+            navBar.style.display = 'none';
+            if (pushToHistory) {
+                history.pushState({}, '', window.location.pathname);
+            }
+        } else {
+            navBar.style.display = 'flex';
+            document.getElementById('currentFolderTitle').innerText = currentFolder.name;
+            if (pushToHistory) {
+                history.pushState({ folderId: currentFolder.id }, '', `?folder=${currentFolder.id}`);
+            }
+        }
+
+        if (currentFolder.subfolders && currentFolder.subfolders.length > 0) {
+            foldersContainer.innerHTML = currentFolder.subfolders.map((sub) => `
+                <div class="folder-card" onclick="openSubfolder('${sub.id}')">
+                    <span class="folder-icon">📂</span>
+                    <span class="folder-name">${sub.name}</span>
+                </div>
+            `).join('');
+            foldersContainer.style.display = 'grid';
+        } else {
+            foldersContainer.innerHTML = '';
+            foldersContainer.style.display = 'none';
+        }
+
+        if (currentFolder.files && currentFolder.files.length > 0) {
+            rootFilesContainer.innerHTML = `
+                <div class="files-container">
+                    <div class="files-title">📎 Долучені файли матеріалів:</div>
+                    <div>
+                        ${currentFolder.files.map(f => `<a href="${f.driveUrl}" target="_blank" class="file-chip">📄 ${f.name} ↗</a>`).join('')}
+                    </div>
+                </div>
+            `;
+            rootFilesContainer.style.display = 'block';
+        } else {
+            rootFilesContainer.innerHTML = '';
+            rootFilesContainer.style.display = 'none';
+        }
+
+        renderSongs(currentFolder.songs || []);
+    }
+
+    function openSubfolder(folderId) {
+        let nextFolder = findFolderById(rootData, folderId);
+        if (nextFolder) {
+            currentFolder = nextFolder;
+            renderCurrentFolder(true); // записуємо в історію браузера
+        }
+    }
+
+    function goBackFolder() {
+        window.history.back(); // Працює тепер і через кнопку сайту, і через браузер!
+    }
+
+    function goToRoot() {
+        currentFolder = rootData;
+        renderCurrentFolder(true);
+        document.getElementById('searchInput').value = '';
+    }
+
+    function findFolderById(folder, id) {
+        if (folder.id === id) return folder;
+        if (folder.subfolders) {
+            for (let sub of folder.subfolders) {
+                let found = findFolderById(sub, id);
+                if (found) return found;
+            }
+        }
+        return null;
+    }
+
+    function renderSongs(songs) {
+        const container = document.getElementById('songList');
+        if (!songs || songs.length === 0) {
+            if (!currentFolder.subfolders || currentFolder.subfolders.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-muted);">Папка порожня</div>';
+            } else {
+                container.innerHTML = '';
+            }
+            return;
+        }
+
+        container.innerHTML = songs.map((song, index) => {
+            let songFilesHtml = '';
+            if (song.files && song.files.length > 0) {
+                songFilesHtml = `
+                    <div class="files-container">
+                        <div class="files-title">📎 Матеріали треку (мінуси, ноти):</div>
+                        <div>
+                            ${song.files.map(f => `<a href="${f.driveUrl}" target="_blank" class="file-chip">🎵 ${f.name} ↗</a>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            let keyBadge = song.key ? `<span class="song-key-badge">${song.key}</span>` : '';
+
+            return `
+                <div class="song-item">
+                    <div class="song-header" onclick="toggleSong(${index})">
+                        <div class="song-title-wrap">
+                            <span class="song-title">${song.name}</span>
+                            ${keyBadge}
+                        </div>
+                        <div class="song-meta">
+                            <span>${song.chords ? '🎼 Акорди' : ''}</span>
+                            <a href="${song.driveUrl}" target="_blank" onclick="event.stopPropagation()" style="color: var(--accent-yellow); text-decoration: none; font-size: 0.8rem;">Диск ↗</a>
+                        </div>
+                    </div>
+                    <div class="song-body" id="song-body-${index}">
+                        ${songFilesHtml}
+                        <div class="song-content-text">${song.chords || song.text || 'Немає текстового вмісту'}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function toggleSong(index) {
+        const body = document.getElementById(`song-body-${index}`);
+        const item = body.closest('.song-item');
+        item.classList.toggle('active');
+    }
+
+    function handleSearch() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        if (!query) {
+            renderCurrentFolder(false);
+            return;
+        }
+
+        document.getElementById('foldersContainer').style.display = 'none';
+        document.getElementById('rootFilesContainer').style.display = 'none';
+        document.getElementById('navigationBar').style.display = 'none';
+
+        let allSongsList = [];
+        collectAllSongs(rootData, allSongsList);
+
+        const filtered = allSongsList.filter(s => 
+            s.name.toLowerCase().includes(query) || 
+            (s.chords && s.chords.toLowerCase().includes(query)) ||
+            (s.key && s.key.toLowerCase().includes(query))
+        );
+        renderSongs(filtered);
+    }
+
+    function collectAllSongs(folder, list) {
+        if (folder.songs) folder.songs.forEach(s => list.push(s));
+        if (folder.subfolders) folder.subfolders.forEach(sub => collectAllSongs(sub, list));
+    }
+
+    function scrollSlider(direction) {
+        const slider = document.getElementById('newsSlider');
+        slider.scrollBy({ left: direction * 320, behavior: 'smooth' });
+    }
+
+    function openNewsModal(title, text) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalText').innerText = text;
+        document.getElementById('newsModal').classList.add('open');
+    }
+
+    function closeNewsModal() {
+        document.getElementById('newsModal').classList.remove('open');
+    }
+</script>
+</body>
+</html>
