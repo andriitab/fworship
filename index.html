@@ -207,15 +207,8 @@
             <!-- Root / Folder Files Container -->
             <div id="rootFilesContainer" style="display: none;"></div>
 
-            <!-- Songs List Container (COMPACT DESIGN & ULTRA-COMPACT ON MOBILE) -->
+            <!-- Songs List Container (ULTRA-COMPACT FLEX DESIGN) -->
             <div class="rounded-xl bg-stage-card border border-stage-border overflow-hidden shadow-lg">
-                <div class="hidden md:grid grid-cols-12 px-5 py-2.5 border-b border-stage-border text-xs font-semibold uppercase tracking-wider text-stage-textMuted bg-stage-black/40">
-                    <div class="col-span-6">Назва пісні</div>
-                    <div class="col-span-2">Тональність</div>
-                    <div class="col-span-2">Матеріали</div>
-                    <div class="col-span-2 text-right">Дії / Диск</div>
-                </div>
-
                 <div id="songList" class="divide-y divide-stage-border">
                     <div style="text-align: center; padding: 1.5rem; color: var(--text-muted);" class="text-xs">⏳ Завантаження репертуару...</div>
                 </div>
@@ -349,7 +342,7 @@
             if (localData) {
                 try {
                     rootData = JSON.parse(localData);
-                    sortDataAlphabetically(rootData); // Автоматичне сортування за алфавітом
+                    sortDataAlphabetically(rootData);
                     currentFolder = rootData;
                     checkUrlFolderPosition();
                     renderCurrentFolder(false);
@@ -366,7 +359,7 @@
                 
                 if (result.status === 'success') {
                     const freshData = result.data;
-                    sortDataAlphabetically(freshData); // Автоматичне сортування за алфавітом
+                    sortDataAlphabetically(freshData);
                     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(freshData));
                     rootData = freshData;
                     
@@ -386,7 +379,6 @@
             }
         }
 
-        // Функція рекурсивного сортування папок та пісень за алфавітом (А-Я)
         function sortDataAlphabetically(folder) {
             if (folder.songs && Array.isArray(folder.songs)) {
                 folder.songs.sort((a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true }));
@@ -450,7 +442,7 @@
             return count;
         }
 
-        // --- 2. RENDER FOLDERS & SONGS (ULTRA-COMPACT MOBILE PADDING) ---
+        // --- 2. RENDER FOLDERS & SONGS (COMPACT FLEX LAYOUT) ---
         function renderCurrentFolder(pushToHistory = true) {
             const foldersContainer = document.getElementById('foldersContainer');
             const rootFilesContainer = document.getElementById('rootFilesContainer');
@@ -555,28 +547,24 @@
                     `;
                 }
 
-                let keyBadge = song.key ? `<span class="song-key-badge px-2 py-0.5 rounded bg-stage-black border border-stage-border text-[11px] font-mono font-bold text-stage-yellow">${song.key}</span>` : '';
+                let keyBadge = song.key ? `<span class="song-key-badge px-2 py-0.5 rounded bg-stage-black border border-stage-border text-[11px] font-mono font-bold text-stage-yellow shrink-0">${song.key}</span>` : '';
 
                 return `
                     <div class="song-item group">
-                        <!-- Зменшені вертикальні відступи пісень для мобільних (py-2 замість py-2.5) -->
-                        <div class="grid grid-cols-1 md:grid-cols-12 px-4 sm:px-5 py-2 items-center gap-1.5 sm:gap-2 hover:bg-stage-hover/50 cursor-pointer transition-custom" onclick="toggleSong(${index})">
-                            <div class="md:col-span-6 flex items-center space-x-2.5">
-                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded bg-stage-yellow/10 border border-stage-yellow/30 text-stage-yellow flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-music text-[9px] sm:text-[10px]"></i>
+                        <!-- Компактний Flex-контейнер: все вирівняно в один рядок як на телефоні, так і на ПК -->
+                        <div class="px-4 py-2.5 flex items-center justify-between gap-2 hover:bg-stage-hover/50 cursor-pointer transition-custom" onclick="toggleSong(${index})">
+                            <div class="flex items-center space-x-2.5 min-w-0 flex-1">
+                                <div class="w-6 h-6 rounded bg-stage-yellow/10 border border-stage-yellow/30 text-stage-yellow flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-music text-[10px]"></i>
                                 </div>
-                                <h4 class="text-xs sm:text-sm font-semibold text-white group-hover:text-stage-yellow transition-custom">${song.name}</h4>
+                                <div class="min-w-0 flex-1">
+                                    <h4 class="text-xs sm:text-sm font-semibold text-white group-hover:text-stage-yellow transition-custom truncate">${song.name}</h4>
+                                    <span class="text-[10px] text-stage-textMuted block">${song.chords ? '🎼 Акорди наявні' : 'Текст'}</span>
+                                </div>
                             </div>
 
-                            <div class="md:col-span-2 flex items-center">
+                            <div class="flex items-center space-x-2 shrink-0">
                                 ${keyBadge}
-                            </div>
-
-                            <div class="md:col-span-2 flex items-center text-[11px] text-stage-textMuted">
-                                <span>${song.chords ? '🎼 Акорди наявні' : 'Текст'}</span>
-                            </div>
-
-                            <div class="md:col-span-2 flex items-center justify-end space-x-2">
                                 <a href="${song.driveUrl}" target="_blank" onclick="event.stopPropagation()" class="p-1.5 rounded border border-stage-border text-stage-textMuted hover:text-stage-yellow hover:border-stage-yellow/50 transition-custom" title="Диск">
                                     <i class="fa-brands fa-google-drive text-xs"></i>
                                 </a>
@@ -585,7 +573,8 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="song-body hidden bg-stage-black/60 border-t border-stage-border px-4 sm:px-5 py-3 text-xs space-y-2.5" id="song-body-${index}">
+                        
+                        <div class="song-body hidden bg-stage-black/60 border-t border-stage-border px-4 py-3 text-xs space-y-2.5" id="song-body-${index}">
                             ${songFilesHtml}
                             <div class="song-content-text font-mono text-xs text-stage-textLight whitespace-pre-wrap leading-relaxed">${song.chords || song.text || 'Немає текстового вмісту'}</div>
                         </div>
@@ -615,7 +604,6 @@
             let allSongsList = [];
             collectAllSongs(rootData, allSongsList);
 
-            // Фільтрація та збереження алфавітного порядку і при пошуку
             const filtered = allSongsList.filter(s => 
                 s.name.toLowerCase().includes(query) || 
                 (s.chords && s.chords.toLowerCase().includes(query)) ||
