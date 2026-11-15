@@ -222,7 +222,7 @@
     <!-- MAIN CONTENT -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-5 sm:px-8 pt-0 pb-8 space-y-12">
 
-        <!-- 1. ГРУПА ПРОСЛАВЛЕННЯ: текст ліворуч, фото і лічильники праворуч -->
+        <!-- 1. ГРУПА ПРОСЛАВЛЕННЯ: текст, фото і лічильники -->
         <section id="about" class="scroll-mt-24">
             <div class="grid-frame grid grid-cols-1 md:grid-cols-2">
 
@@ -230,18 +230,26 @@
                 <div class="flex flex-col justify-center border-b md:border-b-0 md:border-r border-strict bg-black/40 p-6 sm:p-8 lg:p-10">
                     <img src="logo.png" alt="F.Worship" class="block w-full h-auto mb-6">
 
-                        <!-- Лічильники: без рамок, по центру, розділені рискою -->
-                        <div class="flex items-stretch justify-center gap-6 sm:gap-8 font-mono-tech uppercase">
-                            <div class="text-center">
-                                <div id="songCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
-                                <div class="text-[11px] tracking-[0.2em] text-zinc-400 mt-2">Пісень у базі</div>
-                            </div>
-                            <span class="w-px self-stretch bg-white/30"></span>
-                            <div class="text-center">
-                                <div id="statSectionCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
-                                <div class="text-[11px] tracking-[0.2em] text-zinc-400 mt-2">Розділів</div>
-                            </div>
-                        </div>
+                        <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold mb-3">
+                            Про нас
+                        </h1>
+
+                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed mb-6">
+                            Вітаємо на нашій командній платформі. Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
+                        </p>
+
+
+                    	<p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
+                            Запрошуємо! Ми служимо в церкві «Сім'я Христа» (м. Ужгород).
+                    	</p>
+
+                    	<div>
+                        <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer"
+                           class="btn-strict font-mono-tech text-[11px] tracking-[0.18em] uppercase px-3.5 py-2 inline-flex items-center gap-2">
+                            <i class="fa-brands fa-instagram"></i>
+                            <span>[ Instagram церкви ]</span>
+                        </a>
+                    	</div>
 
                 </div>
 
@@ -257,26 +265,20 @@
                     <img src="team1.jpg" alt="Команда F.Worship" width="1920" height="1080" class="relative block w-full h-auto">
 
                     <div class="relative flex-1 flex flex-col justify-center border-t border-strict p-5 sm:p-6">
-                        <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold mb-3">
-                            Про нас
-                        </h1>
-
-                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed mb-6">
-                            Вітаємо на нашій командній платформі! Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
-                        </p>
 
 
-                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
-                        Запрошуємо! Ми служимо в церкві «Сім'я Христа» (м. Ужгород).
-                    </p>
-
-                    <div>
-                        <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer"
-                           class="btn-strict font-mono-tech text-[11px] tracking-[0.18em] uppercase px-3.5 py-2 inline-flex items-center gap-2">
-                            <i class="fa-brands fa-instagram"></i>
-                            <span>[ Instagram церкви ]</span>
-                        </a>
-                    </div>
+                        <!-- Лічильники: без рамок, по центру, розділені рискою -->
+                        <div class="flex items-stretch justify-center gap-6 sm:gap-8 font-mono-tech uppercase">
+                            <div class="text-center">
+                                <div id="songCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
+                                <div class="text-[11px] tracking-[0.2em] text-zinc-400 mt-2">Пісень у базі</div>
+                            </div>
+                            <span class="w-px self-stretch bg-white/30"></span>
+                            <div class="text-center">
+                                <div id="statSectionCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
+                                <div class="text-[11px] tracking-[0.2em] text-zinc-400 mt-2">Розділів</div>
+                            </div>
+                        </div>
 
 
                     </div>
