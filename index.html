@@ -146,6 +146,13 @@
             -webkit-backdrop-filter: blur(12px);
             border-bottom-color: var(--border-line);
         }
+
+        .blur-backdrop { position: relative; clip-path: inset(0); background: #0c0c0c; }
+        .blur-backdrop > .blur-backdrop-img {
+            position: fixed; inset: 0; width: 100vw; height: 100vh;
+            object-fit: cover; filter: blur(40px); transform: scale(1.2);
+            opacity: 0.6; pointer-events: none; user-select: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -155,9 +162,6 @@
         <div class="w-full max-w-6xl mx-auto px-5 sm:px-8 pt-5 pb-3 flex flex-wrap items-center justify-between gap-4">
             <!-- Ліворуч: лого в рамці + назва сторінки -->
             <a href="#about" onclick="goToRoot()" class="flex items-center gap-3 sm:gap-4 min-w-0" title="F.Worship">
-                <span class="h-9 px-2 border border-strict bg-white/[0.03] flex items-center shrink-0">
-                    <img src="logo.png" alt="F.Worship" class="h-7 w-auto block">
-                </span>
                 <span class="font-mono-tech text-xs sm:text-sm tracking-[0.22em] uppercase text-white font-medium hover:text-zinc-300 transition-colors">
                     ГРУПА ПРОСЛАВЛЕННЯ
                 </span>
@@ -216,30 +220,28 @@
         <section id="about" class="scroll-mt-24">
             <div class="grid-frame grid grid-cols-1 md:grid-cols-2">
 
-                <!-- Ліва колонка: текст -->
-                <div class="flex flex-col border-b md:border-b-0 md:border-r border-strict bg-black/40">
-                    <div class="min-h-[48px] py-3 px-6 sm:px-8 lg:px-10 border-b border-strict bg-black/50 flex items-center">
-                        <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">
-                            Група прославлення F.Worship
-                        </h1>
-                    </div>
+                <!-- Ліва колонка: лого, заголовок і текст разом -->
+                <div class="flex flex-col justify-center border-b md:border-b-0 md:border-r border-strict bg-black/40 p-6 sm:p-8 lg:p-10">
+                    <img src="logo.png" alt="F.Worship" class="block w-44 sm:w-52 h-auto mb-6">
 
-                    <div class="flex-1 flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-                        <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3">
-                            Вітаємо на нашій командній платформі! Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
-                        </p>
+                    <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold mb-4">
+                        Внутрішній простір
+                    </h1>
 
-                        <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
-                            <strong class="text-white">Запрошуємо до нас!</strong> Ми служимо в церкві «Сім'я Христа» (м. Ужгород). У її Instagram ви знайдете світлини та відео, а також інформацію про служіння, зокрема про прославлення.
-                        </p>
+                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3">
+                        Вітаємо на нашій командній платформі! Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
+                    </p>
 
-                        <div>
-                            <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer"
-                               class="btn-strict font-mono-tech text-[10px] sm:text-[11px] tracking-[0.18em] uppercase px-3.5 py-2 inline-flex items-center gap-2">
-                                <i class="fa-brands fa-instagram"></i>
-                                <span>[ Instagram церкви ]</span>
-                            </a>
-                        </div>
+                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
+                        <strong class="text-white">Запрошуємо до нас!</strong> Ми служимо в церкві «Сім'я Христа» (м. Ужгород). У її Instagram ви знайдете світлини та відео, а також інформацію про служіння, зокрема про прославлення.
+                    </p>
+
+                    <div>
+                        <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer"
+                           class="btn-strict font-mono-tech text-[10px] sm:text-[11px] tracking-[0.18em] uppercase px-3.5 py-2 inline-flex items-center gap-2">
+                            <i class="fa-brands fa-instagram"></i>
+                            <span>[ Instagram церкви ]</span>
+                        </a>
                     </div>
                 </div>
 
@@ -287,8 +289,12 @@
                 </div>
             </div>
 
+            <div class="blur-backdrop border border-strict">
+                <img src="team1.png" alt="" aria-hidden="true" class="blur-backdrop-img">
+                <div class="absolute inset-0 bg-black/45 pointer-events-none"></div>
+                <div class="relative flex flex-col gap-4 p-3 sm:p-4">
             <!-- Навігація по папках -->
-            <div id="navigationBar" class="items-center justify-between border border-strict bg-black/40 px-4 py-2.5" style="display: none;">
+            <div id="navigationBar" class="items-center justify-between border border-strict bg-black/30 px-4 py-2.5" style="display: none;">
                 <button class="font-mono-tech text-[11px] tracking-[0.18em] uppercase text-accent hover:text-white transition-colors flex items-center gap-2" onclick="goBackFolder()">
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>[ Назад ]</span>
@@ -307,9 +313,11 @@
             <div id="rootFilesContainer" style="display: none;"></div>
 
             <!-- Список пісень -->
-            <div class="grid-frame">
+            <div class="border border-strict bg-black/30">
                 <div id="songList" class="divide-y divide-[rgba(255,255,255,0.14)]">
                     <div class="text-center p-6 text-xs text-zinc-500 font-mono-tech tracking-[0.15em] uppercase">Завантаження репертуару...</div>
+                </div>
+            </div>
                 </div>
             </div>
         </section>
@@ -326,11 +334,9 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3" id="galleryGrid"></div>
         </section>
 
-        <!-- 4. ВЕЛИКЕ ЛОГО -->
+        <!-- 4. ВЕЛИКЕ ЛОГО (без рамки) -->
         <section class="flex justify-center">
-            <div class="w-full md:w-[70%] p-6 sm:p-8 border border-strict bg-black/60">
-                <img src="logo.png" alt="F.Worship" class="block w-full h-auto">
-            </div>
+            <img src="logo.png" alt="F.Worship" class="block w-full md:w-[70%] h-auto">
         </section>
 
     </main>
@@ -562,7 +568,7 @@
 
             if (currentFolder.subfolders && currentFolder.subfolders.length > 0) {
                 foldersContainer.innerHTML = currentFolder.subfolders.map((sub) => `
-                    <div class="folder-card border border-strict bg-black/40 p-3 cursor-pointer flex items-center gap-3" onclick="openSubfolder('${escapeHtml(sub.id)}')">
+                    <div class="folder-card border border-strict bg-black/30 p-3 cursor-pointer flex items-center gap-3" onclick="openSubfolder('${escapeHtml(sub.id)}')">
                         <i class="fa-regular fa-folder-open text-accent text-sm shrink-0"></i>
                         <span class="font-mono-tech text-[11px] tracking-[0.12em] uppercase text-white truncate">${escapeHtml(displayName(sub.name))}</span>
                     </div>
@@ -672,7 +678,7 @@
                             </div>
                         </div>
 
-                        <div class="song-body hidden bg-black/60 border-t border-strict px-4 py-4 text-xs space-y-3" id="song-body-${index}">
+                        <div class="song-body hidden bg-black/45 border-t border-strict px-4 py-4 text-xs space-y-3" id="song-body-${index}">
                             ${songFilesHtml}
                             <div class="font-mono-tech text-xs text-zinc-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(song.chords || song.text || 'Немає текстового вмісту')}</div>
                         </div>
