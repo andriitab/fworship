@@ -231,17 +231,13 @@
                     <img src="logo.png" alt="F.Worship" class="block w-full h-auto mb-6">
 
                         <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold mb-3">
-                            Про нас
+                            Внутрішній простір 
                         </h1>
 
                         <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed mb-6">
                             Вітаємо на нашій командній платформі. Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
                         </p>
 
-
-                    	<p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
-                            Запрошуємо! Ми служимо в церкві «Сім'я Христа» (м. Ужгород).
-                    	</p>
 
                     	<div>
                         <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer"
@@ -303,7 +299,7 @@
                 </div>
             </div>
 
-            <div class="blur-backdrop border border-strict">
+            <div class="blur-backdrop">
                 <img src="team1.jpg" alt="" aria-hidden="true" class="blur-backdrop-img">
                 <div class="absolute inset-0 bg-black/55 pointer-events-none"></div>
                 <div class="relative flex flex-col gap-4 p-3 sm:p-4">
@@ -569,11 +565,11 @@
                 foldersContainer.style.display = 'none';
             }
 
-            if (currentFolder.files && currentFolder.files.length > 0) {
+if (currentFolder.files && currentFolder.files.length > 0) {
                 rootFilesContainer.innerHTML = `
-                    <div class="border border-dashed border-strict bg-black/30 p-3">
-                        <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Долучені файли матеріалів</div>
-                        <div class="flex flex-wrap gap-2">
+                    <div class="bg-transparent p-3 text-center">
+                        <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Долучені файли</div>
+                        <div class="flex flex-wrap justify-center gap-2">
                             ${currentFolder.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-xs"><i class="fa-regular fa-file-lines text-accent"></i>${escapeHtml(f.name)}</a>`).join('')}
                         </div>
                     </div>
@@ -630,12 +626,12 @@
             }
 
             container.innerHTML = songs.map((song, index) => {
-                let songFilesHtml = '';
+let songFilesHtml = '';
                 if (song.files && song.files.length > 0) {
                     songFilesHtml = `
-                        <div class="border border-strict bg-black/40 p-2.5">
-                            <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Матеріали треку (мінуси, ноти)</div>
-                            <div class="flex flex-wrap gap-2">
+                        <div class="bg-transparent p-2.5 text-center">
+                            <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Матеріали треку</div>
+                            <div class="flex flex-wrap justify-center gap-2">
                                 ${song.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-[11px]"><i class="fa-solid fa-music text-accent text-[11px]"></i>${escapeHtml(f.name)}</a>`).join('')}
                             </div>
                         </div>
@@ -653,7 +649,7 @@
                                 <span class="font-mono-tech text-[11px] text-zinc-400 shrink-0 w-6">${pad2(index + 1)}</span>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="text-xs sm:text-sm font-semibold text-white truncate">${escapeHtml(displayName(song.name))}</h4>
-                                    <span class="font-mono-tech text-[11px] tracking-[0.15em] uppercase text-zinc-400 block mt-0.5">${song.chords ? 'Акорди наявні' : 'Текст'}</span>
+                                    <span class="font-mono-tech text-[11px] tracking-[0.15em] uppercase text-zinc-400 block mt-0.5">${song.chords ? 'Акорди є' : 'Текст'}</span>
                                 </div>
                             </div>
 
