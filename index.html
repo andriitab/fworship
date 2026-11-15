@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F.Worship | Робочий простір</title>
+    <meta name="description" content="Група прославлення F.Worship: репертуар з акордами та текстами, фотоальбом, інформація про команду.">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -153,6 +154,11 @@
             object-fit: cover; filter: blur(40px); transform: scale(1.2);
             opacity: 0.35; pointer-events: none; user-select: none;
         }
+        a:focus-visible, button:focus-visible, input:focus-visible,
+        .song-row:focus-visible, .folder-card:focus-visible {
+            outline: 1px solid var(--accent);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -177,12 +183,12 @@
 
                 <div class="flex items-center gap-2">
                     <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" rel="noopener noreferrer"
-                       class="btn-accent h-9 font-mono-tech text-[10px] tracking-[0.18em] uppercase font-bold px-3 inline-flex items-center gap-2">
+                       class="btn-accent h-9 font-mono-tech text-[11px] tracking-[0.18em] uppercase font-bold px-3 inline-flex items-center gap-2">
                         <i class="fa-brands fa-google-drive"></i>
                         <span>[ Google Диск ]</span>
                     </a>
                     <a href="#" onclick="openMessengerModal(event)"
-                       class="btn-strict h-9 font-mono-tech text-[10px] tracking-[0.18em] uppercase px-3 inline-flex items-center gap-2">
+                       class="btn-strict h-9 font-mono-tech text-[11px] tracking-[0.18em] uppercase px-3 inline-flex items-center gap-2">
                         <i class="fa-solid fa-comments"></i>
                         <span>[ Чат ]</span>
                     </a>
@@ -220,49 +226,55 @@
         <section id="about" class="scroll-mt-24">
             <div class="grid-frame grid grid-cols-1 md:grid-cols-2">
 
-                <!-- Ліва колонка: лого, заголовок і текст разом -->
+                <!-- Ліва колонка: лого, запрошення і кнопка -->
                 <div class="flex flex-col justify-center border-b md:border-b-0 md:border-r border-strict bg-black/40 p-6 sm:p-8 lg:p-10">
                     <img src="logo.png" alt="F.Worship" class="block w-full h-auto mb-6">
 
-                    <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold mb-4">
-                        Про нас
-                    </h1>
-
-                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
-                        Вітаємо на нашій командній платформі! Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
+                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
+                        Запрошуємо до нас! Ми служимо в церкві «Сім'я Христа» (м. Ужгород).
                     </p>
 
-                    <!-- Лічильники: без рамок, по центру, розділені рискою -->
-                    <div class="flex items-stretch justify-center gap-6 sm:gap-8 font-mono-tech uppercase">
-                        <div class="text-center">
-                            <div id="songCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
-                            <div class="text-[10px] tracking-[0.2em] text-zinc-400 mt-2">Пісень у базі</div>
-                        </div>
-                        <span class="w-px self-stretch bg-white/30"></span>
-                        <div class="text-center">
-                            <div id="statSectionCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
-                            <div class="text-[10px] tracking-[0.2em] text-zinc-400 mt-2">Розділів</div>
-                        </div>
+                    <div>
+                        <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer"
+                           class="btn-strict font-mono-tech text-[11px] tracking-[0.18em] uppercase px-3.5 py-2 inline-flex items-center gap-2">
+                            <i class="fa-brands fa-instagram"></i>
+                            <span>[ Instagram церкви ]</span>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Права колонка: фото + лічильники на розмитому фоні з цього ж фото -->
                 <div class="relative flex flex-col overflow-hidden bg-[#0c0c0c]">
-                    <img src="team1.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-60 pointer-events-none select-none">
+                    <img src="team1.jpg" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-60 pointer-events-none select-none">
                     <div class="absolute inset-0 bg-black/45 pointer-events-none"></div>
 
                     <div class="relative min-h-[48px] px-5 border-b border-strict bg-black/50 flex items-center">
                         <span class="font-mono-tech text-[11px] tracking-[0.2em] uppercase text-zinc-400">КОМАНДА</span>
                     </div>
 
-                    <img src="team1.png" alt="Команда F.Worship" class="relative block w-full h-auto">
+                    <img src="team1.jpg" alt="Команда F.Worship" width="1920" height="1080" class="relative block w-full h-auto">
 
-                    <div class="relative flex-1 flex items-center border-t border-strict p-5 sm:p-6">
-                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">
-                            <strong class="text-white">Запрошуємо до нас!</strong> Ми служимо в церкві «Сім'я Христа» (м. Ужгород). У її
-                            <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer" class="link-underline text-white inline-flex items-center gap-1.5 whitespace-nowrap"><i class="fa-brands fa-instagram"></i>Instagram</a>
-                            ви знайдете світлини та відео, а також інформацію про служіння, зокрема про прославлення.
+                    <div class="relative flex-1 flex flex-col justify-center border-t border-strict p-5 sm:p-6">
+                        <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold mb-3">
+                            Про нас
+                        </h1>
+
+                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed mb-6">
+                            Вітаємо на нашій командній платформі! Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
                         </p>
+
+                        <!-- Лічильники: без рамок, по центру, розділені рискою -->
+                        <div class="flex items-stretch justify-center gap-6 sm:gap-8 font-mono-tech uppercase">
+                            <div class="text-center">
+                                <div id="songCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
+                                <div class="text-[11px] tracking-[0.2em] text-zinc-400 mt-2">Пісень у базі</div>
+                            </div>
+                            <span class="w-px self-stretch bg-white/30"></span>
+                            <div class="text-center">
+                                <div id="statSectionCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
+                                <div class="text-[11px] tracking-[0.2em] text-zinc-400 mt-2">Розділів</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -275,7 +287,7 @@
                     <h2 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">
                         РЕПЕРТУАР
                     </h2>
-                    <p class="text-xs text-zinc-500 mt-1.5">Тексти, акорди та тональності. Синхронізовано з Google Диском.</p>
+                    <p class="text-xs text-zinc-400 mt-1.5">Тексти, акорди та тональності. Синхронізовано з Google Диском.</p>
                 </div>
 
                 <div class="relative">
@@ -286,7 +298,7 @@
             </div>
 
             <div class="blur-backdrop border border-strict">
-                <img src="team1.png" alt="" aria-hidden="true" class="blur-backdrop-img">
+                <img src="team1.jpg" alt="" aria-hidden="true" class="blur-backdrop-img">
                 <div class="absolute inset-0 bg-black/55 pointer-events-none"></div>
                 <div class="relative flex flex-col gap-4 p-3 sm:p-4">
             <!-- Навігація по папках -->
@@ -295,7 +307,7 @@
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>[ Назад ]</span>
                 </button>
-                <div class="font-mono-tech text-[11px] tracking-[0.12em] uppercase flex items-center gap-2 text-zinc-500 min-w-0">
+                <div class="font-mono-tech text-[11px] tracking-[0.12em] uppercase flex items-center gap-2 text-zinc-400 min-w-0">
                     <button onclick="goToRoot()" class="hover:text-accent transition-colors">Головна</button>
                     <span>/</span>
                     <span id="currentFolderTitle" class="text-white truncate"></span>
@@ -311,7 +323,7 @@
             <!-- Список пісень -->
             <div class="border border-strict bg-black/30">
                 <div id="songList" class="divide-y divide-[rgba(255,255,255,0.14)]">
-                    <div class="text-center p-6 text-xs text-zinc-500 font-mono-tech tracking-[0.15em] uppercase">Завантаження репертуару...</div>
+                    <div class="text-center p-6 text-xs text-zinc-400 font-mono-tech tracking-[0.15em] uppercase">Завантаження репертуару...</div>
                 </div>
             </div>
                 </div>
@@ -324,7 +336,7 @@
                 <h2 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">
                     ФОТОАЛЬБОМ
                 </h2>
-                <p class="text-xs text-zinc-500 mt-1.5">Фотографії з наших виступів та репетицій</p>
+                <p class="text-xs text-zinc-400 mt-1.5">Фотографії з наших виступів та репетицій</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3" id="galleryGrid"></div>
@@ -333,7 +345,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="w-full max-w-6xl mx-auto px-5 sm:px-8 pt-4 pb-6 mt-4 border-t border-strict flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-500 font-mono-tech text-[11px] tracking-[0.2em] uppercase">
+    <footer class="w-full max-w-6xl mx-auto px-5 sm:px-8 pt-4 pb-6 mt-4 border-t border-strict flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-400 font-mono-tech text-[11px] tracking-[0.2em] uppercase">
         <span>VINEYARD UKRAINE</span>
         <div class="flex items-center gap-2">
             <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Google Диск">
@@ -470,7 +482,7 @@
                 }
             } catch (e) {
                 console.error('Помилка фонового оновлення з мережі:', e);
-                if (!rootData) loadMockData();
+                if (!rootData) showLoadError();
             }
         }
 
@@ -494,28 +506,9 @@
             }
         }
 
-        function loadMockData() {
-            rootData = {
-                id: "root",
-                name: "Головна",
-                files: [{ name: "Загальні ноти.pdf", driveUrl: "#" }],
-                subfolders: [
-                    {
-                        id: "sub1",
-                        name: "!Концертний сет",
-                        files: [{ name: "План концерту.docx", driveUrl: "#" }],
-                        subfolders: [],
-                        songs: [
-                            { name: "Ти — моя міцна скала", key: "Am", chords: "Am F C G", text: "Текст...", driveUrl: "#" }
-                        ]
-                    }
-                ],
-                songs: []
-            };
-            sortDataAlphabetically(rootData);
-            currentFolder = rootData;
-            renderCurrentFolder(false);
-            updateCounters();
+        function showLoadError() {
+            document.getElementById('songList').innerHTML =
+                '<div class="text-center p-6 text-xs text-zinc-400 font-mono-tech tracking-[0.15em] uppercase">Не вдалося завантажити репертуар. Спробуйте пізніше.</div>';
         }
 
         function updateCounters() {
@@ -559,7 +552,7 @@
 
             if (currentFolder.subfolders && currentFolder.subfolders.length > 0) {
                 foldersContainer.innerHTML = currentFolder.subfolders.map((sub) => `
-                    <div class="folder-card border border-strict bg-black/30 p-3 cursor-pointer flex items-center gap-3" onclick="openSubfolder('${escapeHtml(sub.id)}')">
+                    <div class="folder-card border border-strict bg-black/30 p-3 cursor-pointer flex items-center gap-3" role="button" tabindex="0" onkeydown="activateOnKey(event)" onclick="openSubfolder('${escapeHtml(sub.id)}')">
                         <i class="fa-regular fa-folder-open text-accent text-sm shrink-0"></i>
                         <span class="font-mono-tech text-[11px] tracking-[0.12em] uppercase text-white truncate">${escapeHtml(displayName(sub.name))}</span>
                     </div>
@@ -573,7 +566,7 @@
             if (currentFolder.files && currentFolder.files.length > 0) {
                 rootFilesContainer.innerHTML = `
                     <div class="border border-dashed border-strict bg-black/30 p-3">
-                        <div class="font-mono-tech text-[10px] tracking-[0.2em] text-zinc-500 uppercase mb-2">Долучені файли матеріалів</div>
+                        <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Долучені файли матеріалів</div>
                         <div class="flex flex-wrap gap-2">
                             ${currentFolder.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-xs"><i class="fa-regular fa-file-lines text-accent"></i>${escapeHtml(f.name)}</a>`).join('')}
                         </div>
@@ -623,7 +616,7 @@
             const container = document.getElementById('songList');
             if (!songs || songs.length === 0) {
                 if (!currentFolder.subfolders || currentFolder.subfolders.length === 0) {
-                    container.innerHTML = '<div class="text-center p-5 text-xs text-zinc-500 font-mono-tech tracking-[0.15em] uppercase">Папка порожня</div>';
+                    container.innerHTML = '<div class="text-center p-5 text-xs text-zinc-400 font-mono-tech tracking-[0.15em] uppercase">Папка порожня</div>';
                 } else {
                     container.innerHTML = '';
                 }
@@ -635,9 +628,9 @@
                 if (song.files && song.files.length > 0) {
                     songFilesHtml = `
                         <div class="border border-strict bg-black/40 p-2.5">
-                            <div class="font-mono-tech text-[10px] tracking-[0.2em] text-zinc-500 uppercase mb-2">Матеріали треку (мінуси, ноти)</div>
+                            <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Матеріали треку (мінуси, ноти)</div>
                             <div class="flex flex-wrap gap-2">
-                                ${song.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-[11px]"><i class="fa-solid fa-music text-accent text-[10px]"></i>${escapeHtml(f.name)}</a>`).join('')}
+                                ${song.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-[11px]"><i class="fa-solid fa-music text-accent text-[11px]"></i>${escapeHtml(f.name)}</a>`).join('')}
                             </div>
                         </div>
                     `;
@@ -649,12 +642,12 @@
 
                 return `
                     <div class="song-item">
-                        <div class="song-row px-4 py-3 flex items-center justify-between gap-3 cursor-pointer" onclick="toggleSong(${index})">
+                        <div class="song-row px-4 py-3 flex items-center justify-between gap-3 cursor-pointer" role="button" tabindex="0" onkeydown="activateOnKey(event)" onclick="toggleSong(${index})">
                             <div class="flex items-center gap-3 min-w-0 flex-1">
-                                <span class="font-mono-tech text-[11px] text-zinc-600 shrink-0 w-6">${pad2(index + 1)}</span>
+                                <span class="font-mono-tech text-[11px] text-zinc-400 shrink-0 w-6">${pad2(index + 1)}</span>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="text-xs sm:text-sm font-semibold text-white truncate">${escapeHtml(displayName(song.name))}</h4>
-                                    <span class="font-mono-tech text-[10px] tracking-[0.15em] uppercase text-zinc-500 block mt-0.5">${song.chords ? 'Акорди наявні' : 'Текст'}</span>
+                                    <span class="font-mono-tech text-[11px] tracking-[0.15em] uppercase text-zinc-400 block mt-0.5">${song.chords ? 'Акорди наявні' : 'Текст'}</span>
                                 </div>
                             </div>
 
@@ -663,8 +656,8 @@
                                 <a href="${escapeHtml(song.driveUrl)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="icon-btn !w-8 !h-8" title="Відкрити на Диску">
                                     <i class="fa-brands fa-google-drive text-xs"></i>
                                 </a>
-                                <span class="w-6 h-8 flex items-center justify-center text-zinc-500">
-                                    <i class="song-chevron fa-solid fa-chevron-down text-[10px] transition-transform duration-300"></i>
+                                <span class="w-6 h-8 flex items-center justify-center text-zinc-400">
+                                    <i class="song-chevron fa-solid fa-chevron-down text-[11px] transition-transform duration-300"></i>
                                 </span>
                             </div>
                         </div>
@@ -676,6 +669,15 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        // Enter / Пробіл відкривають рядок так само, як клік
+        function activateOnKey(e) {
+            if (e.target !== e.currentTarget) return;
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.currentTarget.click();
+            }
         }
 
         function toggleSong(index) {
@@ -747,7 +749,7 @@
                 <div class="photo-card aspect-video w-full relative overflow-hidden bg-black border border-strict cursor-pointer" onclick="openPhoto(${i})">
                     <img src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.caption)}" loading="lazy" class="w-full h-full object-cover">
                     <div class="absolute inset-x-0 bottom-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
-                        <span class="font-mono-tech text-[10px] tracking-[0.2em] uppercase text-zinc-300">ФОТО // ${pad2(i + 1)}</span>
+                        <span class="font-mono-tech text-[11px] tracking-[0.2em] uppercase text-zinc-300">ФОТО // ${pad2(i + 1)}</span>
                     </div>
                 </div>
             `).join('');
