@@ -228,20 +228,21 @@
                         Про нас
                     </h1>
 
-                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-3">
+                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
                         Вітаємо на нашій командній платформі! Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків.
                     </p>
 
-                    <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
-                        <strong class="text-white">Запрошуємо до нас!</strong> Ми служимо в церкві «Сім'я Христа» (м. Ужгород). У її Instagram ви знайдете світлини та відео, а також інформацію про служіння, зокрема про прославлення.
-                    </p>
-
-                    <div>
-                        <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer"
-                           class="btn-strict font-mono-tech text-[10px] sm:text-[11px] tracking-[0.18em] uppercase px-3.5 py-2 inline-flex items-center gap-2">
-                            <i class="fa-brands fa-instagram"></i>
-                            <span>[ Instagram церкви ]</span>
-                        </a>
+                    <!-- Лічильники: без рамок, по центру, розділені рискою -->
+                    <div class="flex items-stretch justify-center gap-6 sm:gap-8 font-mono-tech uppercase">
+                        <div class="text-center">
+                            <div id="songCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
+                            <div class="text-[10px] tracking-[0.2em] text-zinc-400 mt-2">Пісень у базі</div>
+                        </div>
+                        <span class="w-px self-stretch bg-white/30"></span>
+                        <div class="text-center">
+                            <div id="statSectionCount" class="text-white text-3xl sm:text-4xl font-bold leading-none">0</div>
+                            <div class="text-[10px] tracking-[0.2em] text-zinc-400 mt-2">Розділів</div>
+                        </div>
                     </div>
                 </div>
 
@@ -257,16 +258,9 @@
                     <img src="team1.png" alt="Команда F.Worship" class="relative block w-full h-auto">
 
                     <div class="relative flex-1 flex items-center border-t border-strict p-5 sm:p-6">
-                        <div class="w-full grid grid-cols-2 gap-3 font-mono-tech text-[11px] tracking-[0.12em] uppercase text-zinc-300">
-                            <div class="border border-strict bg-black/30 px-3 py-2.5">
-                                <div class="text-zinc-400 text-[10px] mb-1">Пісень у базі</div>
-                                <strong class="text-white text-lg font-medium" id="songCount">0</strong>
-                            </div>
-                            <div class="border border-strict bg-black/30 px-3 py-2.5">
-                                <div class="text-zinc-400 text-[10px] mb-1">Розділів</div>
-                                <strong class="text-white text-lg font-medium" id="statSectionCount">0</strong>
-                            </div>
-                        </div>
+                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                            <strong class="text-white">Запрошуємо до нас!</strong> Ми служимо в церкві «Сім'я Христа» м. Ужгород <a href="https://www.instagram.com/family_of_christ_church/" target="_blank" rel="noopener noreferrer" class="link-underline text-white inline-flex items-center gap-1.5 whitespace-nowrap"><i class="fa-brands fa-instagram"></i>Instagram</a>
+                        </p>
                     </div>
                 </div>
             </div>
