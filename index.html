@@ -282,7 +282,7 @@
             </div>
         </section>
 
-        <!-- 2. РЕПЕРТУАР (на всю ширину) -->
+<!-- 2. РЕПЕРТУАР (на всю ширину) -->
         <section id="repertoire" class="space-y-3 scroll-mt-24">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
@@ -299,49 +299,34 @@
                 </div>
             </div>
 
-            <div class="blur-backdrop">
-                <img src="team1.jpg" alt="" aria-hidden="true" class="blur-backdrop-img">
-                <div class="absolute inset-0 bg-black/55 pointer-events-none"></div>
-                <div class="relative flex flex-col gap-4 p-3 sm:p-4">
-            <!-- Навігація по папках -->
-            <div id="navigationBar" class="items-center justify-between border border-strict bg-black/30 px-4 py-2.5" style="display: none;">
-                <button class="font-mono-tech text-[11px] tracking-[0.18em] uppercase text-accent hover:text-white transition-colors flex items-center gap-2" onclick="goBackFolder()">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>[ Назад ]</span>
-                </button>
-                <div class="font-mono-tech text-[11px] tracking-[0.12em] uppercase flex items-center gap-2 text-zinc-400 min-w-0">
-                    <button onclick="goToRoot()" class="hover:text-accent transition-colors">Головна</button>
-                    <span>/</span>
-                    <span id="currentFolderTitle" class="text-white truncate"></span>
+            <!-- Контейнер без фону та відступів по контуру -->
+            <div class="flex flex-col gap-4">
+                <!-- Навігація по папках -->
+                <div id="navigationBar" class="items-center justify-between border border-strict bg-black/30 px-4 py-2.5" style="display: none;">
+                    <button class="font-mono-tech text-[11px] tracking-[0.18em] uppercase text-accent hover:text-white transition-colors flex items-center gap-2" onclick="goBackFolder()">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>[ Назад ]</span>
+                    </button>
+                    <div class="font-mono-tech text-[11px] tracking-[0.12em] uppercase flex items-center gap-2 text-zinc-400 min-w-0">
+                        <button onclick="goToRoot()" class="hover:text-accent transition-colors">Головна</button>
+                        <span>/</span>
+                        <span id="currentFolderTitle" class="text-white truncate"></span>
+                    </div>
+                </div>
+
+                <!-- Підпапки -->
+                <div id="foldersContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+
+                <!-- Файли папки -->
+                <div id="rootFilesContainer" style="display: none;"></div>
+
+                <!-- Список пісень -->
+                <div class="border border-strict bg-black/30">
+                    <div id="songList" class="divide-y divide-[rgba(255,255,255,0.14)]">
+                        <div class="text-center p-6 text-xs text-zinc-400 font-mono-tech tracking-[0.15em] uppercase">Завантаження репертуару...</div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Підпапки -->
-            <div id="foldersContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
-
-            <!-- Файли папки -->
-            <div id="rootFilesContainer" style="display: none;"></div>
-
-            <!-- Список пісень -->
-            <div class="border border-strict bg-black/30">
-                <div id="songList" class="divide-y divide-[rgba(255,255,255,0.14)]">
-                    <div class="text-center p-6 text-xs text-zinc-400 font-mono-tech tracking-[0.15em] uppercase">Завантаження репертуару...</div>
-                </div>
-            </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. ФОТОАЛЬБОМ -->
-        <section id="gallery" class="space-y-3 scroll-mt-24">
-            <div>
-                <h2 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">
-                    ФОТОАЛЬБОМ
-                </h2>
-                <p class="text-xs text-zinc-400 mt-1.5">Фотографії з наших виступів та репетицій</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3" id="galleryGrid"></div>
         </section>
 
     </main>
