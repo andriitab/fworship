@@ -292,11 +292,12 @@
                     <p class="text-xs text-zinc-400 mt-1.5">Тексти, акорди та тональності. Синхронізовано з Google Диском.</p>
                 </div>
 
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 text-xs"></i>
-                    <input type="text" id="searchInput" placeholder="Пошук пісні або файлу..." oninput="handleSearch()"
-                           class="w-full md:w-80 pl-9 pr-3.5 py-2.5 bg-white/[0.08] border border-white/40 text-xs text-white placeholder-zinc-400 shadow-[0_0_0_3px_rgba(255,255,255,0.04)] focus:outline-none focus:border-accent focus:bg-white/[0.12] transition-colors">
-                </div>
+<div class="relative w-full md:w-96">
+    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-accent text-xs"></i>
+    <input type="text" id="searchInput" placeholder="Пошук: назва, слово або фраза..." oninput="handleSearch()"
+           class="w-full pl-10 pr-4 py-2.5 bg-black/40 border border-white/30 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-accent focus:bg-black/60 transition-colors shadow-sm">
+</div>
+
             </div>
 
             <!-- Контейнер без фону та відступів по контуру -->
