@@ -218,17 +218,16 @@
     <!-- MAIN CONTENT -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-5 sm:px-8 pt-0 pb-8 space-y-12">
 
-<!-- 1. ГРУПА ПРОСЛАВЛЕННЯ: єдиний компактний блок із розмитим фоном -->
+        <!-- 1. ГРУПА ПРОСЛАВЛЕННЯ: єдиний компактний блок із розмитим фоном -->
         <section id="about" class="scroll-mt-24">
             <div class="blur-backdrop border border-strict p-5 sm:p-6 lg:p-8">
                 <img src="team1.jpg" alt="" aria-hidden="true" class="blur-backdrop-img">
                 <div class="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
-                <!-- Використовуємо flex-col, щоб елементи йшли один під одним на мобільних і вирівнювались за потребою -->
-                <div class="relative z-10 flex flex-col gap-6">
+                <div class="relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8">
                     
-                    <!-- Верхня частина: Логотип, заголовки, тексти та лічильники -->
-                    <div class="space-y-4 w-full">
+                    <!-- Ліва частина: Логотип зверху, дворядковий заголовок, текст, абзац про звук і відцентровані лічильники -->
+                    <div class="flex-1 space-y-4 w-full">
                         <img src="logo.png" alt="F.Worship" class="block w-40 sm:w-48 h-auto mb-2">
 
                         <div>
@@ -241,8 +240,7 @@
                         </div>
 
                         <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed max-w-2xl">
-                            Вітаємо на нашій командній платформі. Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків. 
-                            Живим звук! Готуємо власні аранжування та кавери, зосереджуючись на атмосфері поклоніння нашому могутньому Господу, Ісусу Христу.
+                            Вітаємо на нашій командній платформі. Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків. Справді живий звук, готуємо власні аранжування та кавери, зосереджуючись на атмосфері поклоніння нашому Гоподу, Ісусу Христу.
                         </p>
 
                         <!-- Лічильники відцентровані -->
@@ -259,17 +257,15 @@
                         </div>
                     </div>
 
-                    <!-- Нижня / права частина: Фото групи, вирівняне вправо -->
-                    <div class="flex justify-end w-full pt-2">
-                        <div class="w-full sm:w-80 lg:w-72 shrink-0">
-                            <div class="border border-strict bg-black/40 p-1.5 cursor-pointer group shadow-lg" onclick="openLightbox('team1.jpg', 'Команда F.Worship')" title="Натисніть, щоб збільшити">
-                                <div class="relative overflow-hidden aspect-video">
-                                    <img src="team1.jpg" alt="Команда F.Worship" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300">
-                                    <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                        <span class="font-mono-tech text-[10px] tracking-[0.2em] uppercase bg-black/80 text-accent px-2.5 py-1 border border-accent/40">
-                                            [ Збільшити ]
-                                        </span>
-                                    </div>
+                    <!-- Права частина: Зменшене фото групи з кліком на збільшення -->
+                    <div class="w-full sm:w-80 lg:w-72 shrink-0">
+                        <div class="border border-strict bg-black/40 p-1.5 cursor-pointer group shadow-lg" onclick="openLightbox('team1.jpg', 'Команда F.Worship')" title="Натисніть, щоб збільшити">
+                            <div class="relative overflow-hidden aspect-video">
+                                <img src="team1.jpg" alt="Команда F.Worship" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300">
+                                <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                    <span class="font-mono-tech text-[10px] tracking-[0.2em] uppercase bg-black/80 text-accent px-2.5 py-1 border border-accent/40">
+                                        [ Збільшити ]
+                                    </span>
                                 </div>
                             </div>
                         </div>
