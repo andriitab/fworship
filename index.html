@@ -7,203 +7,122 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
-    <style>html,body{background:#000000}</style>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        accent: '#ffcc00'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
-                    }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: {
+            colors: { accent: '#ffcc00' },
+            fontFamily: { mono: ['JetBrains Mono', 'monospace'] }
+        } } }
     </script>
     <style>
-        :root {
-            --bg-top: #141414;
-            --bg-bottom: #000000;
-            --border-line: rgba(255, 255, 255, 0.14);
-            --accent: #ffcc00;
-        }
-
-        * {
-            box-sizing: border-box;
-            border-radius: 0px !important;
-        }
-
+        :root { --border-line: rgba(255,255,255,.14); --accent: #ffcc00; }
+        * { box-sizing: border-box; }
         html, body {
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(180deg, var(--bg-top) 0%, #070707 45%, var(--bg-bottom) 100%);
-            background-attachment: fixed;
-            color: #f4f4f5;
+            min-height: 100vh; margin: 0; color: #f4f4f5;
+            background: linear-gradient(180deg, #141414 0%, #070707 45%, #000 100%) fixed;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-
         ::selection { background: var(--accent); color: #000; }
-
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #2a2a2a; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
-
-        .grid-frame {
-            border: 1px solid var(--border-line);
-            background: rgba(10, 10, 10, 0.72);
-        }
-
         .border-strict { border-color: var(--border-line) !important; }
 
-        .btn-strict {
-            border: 1px solid var(--border-line);
-            background: transparent;
-            color: #e4e4e7;
-            transition: all 0.2s ease;
-        }
-        .btn-strict:hover {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-        }
-
-        .btn-accent {
-            border: 1px solid var(--accent);
-            background: var(--accent);
-            color: #000;
-            transition: all 0.2s ease;
-        }
-        .btn-accent:hover {
-            background: #fff;
-            border-color: #fff;
-        }
-
+        .btn-strict, .btn-accent, .icon-btn { transition: all .2s ease; }
+        .btn-strict { border: 1px solid var(--border-line); color: #e4e4e7; }
+        .btn-strict:hover, .icon-btn:hover { background: #fff; color: #000; border-color: #fff; }
+        .btn-accent { border: 1px solid var(--accent); background: var(--accent); color: #000; }
+        .btn-accent:hover { background: #fff; border-color: #fff; }
         .icon-btn {
-            border: 1px solid var(--border-line);
-            background: rgba(255, 255, 255, 0.03);
-            color: #d4d4d8;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-        }
-        .icon-btn:hover {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
+            border: 1px solid var(--border-line); background: rgba(255,255,255,.03); color: #d4d4d8;
+            display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;
         }
 
-        .nav-link {
-            transition: color 0.2s ease, border-color 0.2s ease;
-            border-bottom: 1px solid transparent;
-        }
-        .nav-link:hover {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
+        .nav-link { border-bottom: 1px solid transparent; transition: color .2s ease, border-color .2s ease; }
+        .nav-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-        .folder-card { transition: all 0.2s ease; }
-        .folder-card:hover { border-color: var(--accent) !important; background: rgba(255, 204, 0, 0.05); }
+        .folder-card { transition: all .2s ease; }
+        .folder-card:hover { border-color: var(--accent) !important; background: rgba(255,204,0,.05); }
 
-        .song-row { transition: background 0.2s ease; }
-        .song-row:hover { background: rgba(255, 255, 255, 0.04); }
-        .song-item.active .song-row { background: rgba(255, 255, 255, 0.05); box-shadow: inset 2px 0 0 var(--accent); }
+        .song-row { transition: background .2s ease; }
+        .song-row:hover { background: rgba(255,255,255,.04); }
+        .song-item.active .song-row { background: rgba(255,255,255,.05); box-shadow: inset 2px 0 0 var(--accent); }
         .song-item.active .song-chevron { transform: rotate(180deg); }
 
-        .photo-card img { transition: transform 0.5s ease, filter 0.3s ease; filter: contrast(1.05) brightness(0.92); }
+        .photo-card img { transition: transform .5s ease, filter .3s ease; filter: contrast(1.05) brightness(.92); }
         .photo-card:hover img { transform: scale(1.04); filter: contrast(1.05) brightness(1); }
 
-        .link-underline {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            text-decoration-color: rgba(255, 255, 255, 0.35);
-            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        /* Згортувані секції */
+        summary { list-style: none; cursor: pointer; }
+        summary::-webkit-details-marker { display: none; }
+        .section-toggle {
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            border: 1px solid var(--border-line); background: rgba(0,0,0,.3);
+            padding: .75rem 1rem; transition: border-color .2s ease;
         }
-        .link-underline:hover { color: var(--accent); text-decoration-color: var(--accent); }
+        .section-toggle:hover { border-color: var(--accent); }
+        details > summary > i { transition: transform .3s ease; }
+        details[open] > summary > i { transform: rotate(180deg); }
 
-        #siteHeader {
-            border-bottom: 1px solid transparent;
-            transition: background-color 0.25s ease, border-color 0.25s ease;
-        }
+        #siteHeader { border-bottom: 1px solid transparent; transition: background-color .25s ease, border-color .25s ease; }
         #siteHeader.header-solid {
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(0,0,0,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border-bottom-color: var(--border-line);
         }
 
         .blur-backdrop { position: relative; overflow: hidden; background: #0c0c0c; }
         .blur-backdrop > .blur-backdrop-img {
-            position: absolute; inset: 0; width: 100%; height: 100%;
-            object-fit: cover; filter: blur(40px); transform: scale(1.2);
-            opacity: 0.7; pointer-events: none; user-select: none;
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+            filter: blur(40px); transform: scale(1.2); opacity: .7; pointer-events: none; user-select: none;
         }
-        a:focus-visible, button:focus-visible, input:focus-visible,
-        .song-row:focus-visible, .folder-card:focus-visible {
-            outline: 1px solid var(--accent);
-            outline-offset: 2px;
+
+        a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible,
+        .song-row:focus-visible, .folder-card:focus-visible, .photo-card:focus-visible {
+            outline: 1px solid var(--accent); outline-offset: 2px;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- HEADER / NAVIGATION -->
+    <!-- HEADER -->
     <header id="siteHeader" class="sticky top-0 z-40">
         <div class="w-full max-w-6xl mx-auto px-5 sm:px-8 pt-5 pb-3 flex flex-wrap items-center justify-between gap-4">
-            <a href="#about" onclick="goToRoot()" class="flex items-center gap-3 sm:gap-4 min-w-0" title="F.Worship">
-                <span class="font-mono-tech text-xs sm:text-sm tracking-[0.22em] uppercase text-white font-medium hover:text-zinc-300 transition-colors">
-                    Vineyard Ukraine
-                </span>
+            <a href="#about" title="F.Worship" class="font-mono text-xs sm:text-sm tracking-[0.22em] uppercase text-white font-medium hover:text-zinc-300 transition-colors">
+                Vineyard Ukraine
             </a>
 
             <div class="hidden lg:flex items-center gap-6">
-                <nav class="flex items-center gap-6 font-mono-tech text-[11px] tracking-[0.2em] uppercase text-zinc-300">
+                <nav class="flex items-center gap-6 font-mono text-[11px] tracking-[0.2em] uppercase text-zinc-300">
                     <a href="#about" class="nav-link py-1">Про нас</a>
-                    <a href="#repertoire" onclick="goToRoot()" class="nav-link py-1">Репертуар</a>
+                    <a href="#repertoire" class="nav-link py-1">Репертуар</a>
                     <a href="#gallery" class="nav-link py-1">Галерея</a>
                 </nav>
-
                 <div class="flex items-center gap-2">
                     <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" rel="noopener noreferrer"
-                       class="btn-accent h-9 font-mono-tech text-[11px] tracking-[0.18em] uppercase font-bold px-3 inline-flex items-center gap-2">
-                        <i class="fa-brands fa-google-drive"></i>
-                        <span>[ Google Диск ]</span>
+                       class="btn-accent h-9 font-mono text-[11px] tracking-[0.18em] uppercase font-bold px-3 inline-flex items-center gap-2">
+                        <i class="fa-brands fa-google-drive"></i><span>[ Google Диск ]</span>
                     </a>
                     <a href="#" onclick="openMessengerModal(event)"
-                       class="btn-strict h-9 font-mono-tech text-[11px] tracking-[0.18em] uppercase px-3 inline-flex items-center gap-2">
-                        <i class="fa-solid fa-comments"></i>
-                        <span>[ Чат ]</span>
+                       class="btn-strict h-9 font-mono text-[11px] tracking-[0.18em] uppercase px-3 inline-flex items-center gap-2">
+                        <i class="fa-solid fa-comments"></i><span>[ Чат ]</span>
                     </a>
                 </div>
             </div>
 
-            <button id="mobileMenuBtn" class="lg:hidden icon-btn" aria-label="Меню">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <button id="mobileMenuBtn" class="lg:hidden icon-btn" aria-label="Меню"><i class="fa-solid fa-bars"></i></button>
         </div>
 
         <div id="mobileMenu" class="hidden lg:hidden border-t border-strict">
-            <div class="max-w-6xl mx-auto px-5 sm:px-8 py-4 space-y-1 font-mono-tech text-xs tracking-[0.2em] uppercase">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8 py-4 space-y-1 font-mono text-xs tracking-[0.2em] uppercase">
                 <a href="#about" class="block py-2.5 border-b border-strict text-zinc-300 hover:text-accent">Про нас</a>
-                <a href="#repertoire" onclick="goToRoot()" class="block py-2.5 border-b border-strict text-zinc-300 hover:text-accent">Репертуар</a>
+                <a href="#repertoire" class="block py-2.5 border-b border-strict text-zinc-300 hover:text-accent">Репертуар</a>
                 <a href="#gallery" class="block py-2.5 border-b border-strict text-zinc-300 hover:text-accent">Галерея</a>
                 <div class="pt-3 flex flex-col gap-2">
                     <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" rel="noopener noreferrer" class="btn-accent text-center py-2.5 text-[11px] font-bold">
@@ -217,34 +136,28 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-5 sm:px-8 pt-0 pb-8 space-y-12">
+    <main class="flex-grow max-w-6xl w-full mx-auto px-5 sm:px-8 pb-8 space-y-6">
 
-        <!-- 1. ГРУПА ПРОСЛАВЛЕННЯ -->
+        <!-- 1. ПРО НАС -->
         <section id="about" class="scroll-mt-24">
             <div class="blur-backdrop border border-strict p-5 sm:p-6 lg:p-8">
                 <img src="team1.jpg" alt="" aria-hidden="true" class="blur-backdrop-img">
                 <div class="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
                 <div class="relative z-10 flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
-                    
                     <div class="flex-1 space-y-4 w-full">
-                        <img src="logo.png" alt="F.Worship" class="block w-40 sm:w-48 h-auto mb-2">
+                        <img src="logo.png" alt="F.Worship" class="block w-40 sm:w-48 h-auto mb-2 mx-auto lg:mx-0">
 
                         <div>
-                            <h1 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">
-                                Група прославлення
-                            </h1>
-                            <p class="font-mono-tech text-[11px] tracking-[0.15em] text-accent uppercase mt-1">
-                                Церква &quot;Сім'я Христа&quot; м.Ужгород
-                            </p>
+                            <h1 class="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">Група прославлення</h1>
+                            <p class="font-mono text-[11px] tracking-[0.15em] text-accent uppercase mt-1">Церква &quot;Сім'я Христа&quot; м.Ужгород</p>
                         </div>
 
                         <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed max-w-2xl">
                             Вітаємо на нашій командній платформі. Тут зібрана актуальна інформація про нас, репертуар з акордами та текстами безпосередньо з Google Диска та фотоархів з наших виступів і саундчеків. Справді живий звук, готуємо власні аранжування та кавери, зосереджуючись на атмосфері поклоніння нашому Господу, Ісусу Христу.
                         </p>
 
-                        <div class="flex items-center justify-center gap-8 pt-4 border-t border-white/10 font-mono-tech uppercase">
+                        <div class="flex items-center justify-center gap-8 pt-4 border-t border-white/10 font-mono uppercase">
                             <div class="text-center">
                                 <div id="songCount" class="text-white text-2xl sm:text-3xl font-bold leading-none">0</div>
                                 <div class="text-[10px] tracking-[0.2em] text-zinc-400 mt-1.5">Пісень у базі</div>
@@ -260,376 +173,306 @@
                     <div class="w-full sm:w-96 lg:w-[420px] shrink-0">
                         <div class="border border-white/25 cursor-pointer group shadow-2xl" onclick="openLightbox('team1.jpg', 'Команда F.Worship')" title="Натисніть, щоб збільшити">
                             <div class="relative overflow-hidden aspect-video">
-                                <img src="team1.jpg" alt="Команда F.Worship" class="w-full h-full object-cover contrast-105 brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-300">
+                                <img src="team1.jpg" alt="Команда F.Worship" class="w-full h-full object-cover brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-300">
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                    <span class="font-mono-tech text-[10px] tracking-[0.2em] uppercase bg-black/85 text-accent px-3 py-1.5 border border-accent/50">
-                                        [ Збільшити ]
-                                    </span>
+                                    <span class="font-mono text-[10px] tracking-[0.2em] uppercase bg-black/85 text-accent px-3 py-1.5 border border-accent/50">[ Збільшити ]</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- 2. РЕПЕРТУАР -->
-        <section id="repertoire" class="space-y-3 scroll-mt-24">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <!-- 2. РЕПЕРТУАР (згорнутий) -->
+        <details id="repertoire" class="scroll-mt-24">
+            <summary class="section-toggle">
                 <div>
-                    <h2 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">
-                        РЕПЕРТУАР
-                    </h2>
+                    <h2 class="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">РЕПЕРТУАР</h2>
                     <p class="text-xs text-zinc-400 mt-1.5">Тексти, акорди та тональності. Синхронізовано з Google Диском.</p>
                 </div>
+                <i class="fa-solid fa-chevron-down text-xs text-accent"></i>
+            </summary>
 
+            <div class="space-y-3 pt-3">
                 <div class="relative w-full md:w-96">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-accent/60 text-xs"></i>
                     <input type="text" id="searchInput" placeholder="Пошук: назва, слова або фраза в пісні..." oninput="handleSearch()"
-                           class="w-full pl-10 pr-4 py-2.5 bg-accent/[0.03] border border-accent/30 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-accent focus:bg-accent/[0.06] transition-colors shadow-sm">
+                           class="w-full pl-10 pr-4 py-2.5 bg-accent/[0.03] border border-accent/30 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-accent focus:bg-accent/[0.06] transition-colors">
                 </div>
-            </div>
 
-            <div class="flex flex-col gap-4">
-                <div id="navigationBar" class="items-center justify-between border border-strict bg-black/30 px-4 py-2.5" style="display: none;">
-                    <button class="font-mono-tech text-[11px] tracking-[0.18em] uppercase text-accent hover:text-white transition-colors flex items-center gap-2" onclick="goBackFolder()">
-                        <i class="fa-solid fa-arrow-left"></i>
-                        <span>[ Назад ]</span>
-                    </button>
-                    <div class="font-mono-tech text-[11px] tracking-[0.12em] uppercase flex items-center gap-2 text-zinc-400 min-w-0">
-                        <button onclick="goToRoot()" class="hover:text-accent transition-colors">Головна</button>
-                        <span>/</span>
-                        <span id="currentFolderTitle" class="text-white truncate"></span>
+                <div class="flex flex-col gap-4">
+                    <div id="navigationBar" class="items-center justify-between border border-strict bg-black/30 px-4 py-2.5" style="display:none">
+                        <button class="font-mono text-[11px] tracking-[0.18em] uppercase text-accent hover:text-white transition-colors flex items-center gap-2" onclick="history.back()">
+                            <i class="fa-solid fa-arrow-left"></i><span>[ Назад ]</span>
+                        </button>
+                        <div class="font-mono text-[11px] tracking-[0.12em] uppercase flex items-center gap-2 text-zinc-400 min-w-0">
+                            <button onclick="goToRoot()" class="hover:text-accent transition-colors">Головна</button>
+                            <span>/</span>
+                            <span id="currentFolderTitle" class="text-white truncate"></span>
+                        </div>
+                    </div>
+
+                    <div id="foldersContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+                    <div id="rootFilesContainer" style="display:none"></div>
+
+                    <div class="border border-strict bg-black/30">
+                        <div id="songList" class="divide-y divide-[rgba(255,255,255,0.14)]">
+                            <div class="text-center p-6 text-xs text-zinc-400 font-mono tracking-[0.15em] uppercase">Завантаження репертуару...</div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </details>
 
-                <div id="foldersContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
-                <div id="rootFilesContainer" style="display: none;"></div>
-
-                <div class="border border-strict bg-black/30">
-                    <div id="songList" class="divide-y divide-[rgba(255,255,255,0.14)]">
-                        <div class="text-center p-6 text-xs text-zinc-400 font-mono-tech tracking-[0.15em] uppercase">Завантаження репертуару...</div>
-                    </div>
+        <!-- 3. ФОТОАЛЬБОМ (згорнутий) -->
+        <details id="gallery" class="scroll-mt-24">
+            <summary class="section-toggle">
+                <div>
+                    <h2 class="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">ФОТОАЛЬБОМ</h2>
+                    <p class="text-xs text-zinc-400 mt-1.5">Фотографії з наших виступів та репетицій</p>
                 </div>
-            </div>
-        </section>
+                <i class="fa-solid fa-chevron-down text-xs text-accent"></i>
+            </summary>
 
-        <!-- 3. ФОТОАЛЬБОМ (4 випадкові фото) -->
-        <section id="gallery" class="space-y-4 scroll-mt-24">
-            <div>
-                <h2 class="font-mono-tech text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-semibold">
-                    ФОТОАЛЬБОМ
-                </h2>
-                <p class="text-xs text-zinc-400 mt-1.5">Фотографії з наших виступів та репетицій</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3" id="galleryGrid">
-                <div class="col-span-full border border-strict bg-black/30 p-6 text-center font-mono-tech text-xs tracking-[0.15em] uppercase text-zinc-400">
-                    Завантаження фотографій...
+            <div class="pt-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3" id="galleryGrid">
+                    <div class="col-span-full border border-strict bg-black/30 p-6 text-center font-mono text-xs tracking-[0.15em] uppercase text-zinc-400">Завантаження фотографій...</div>
                 </div>
+                <a href="https://www.instagram.com/stories/highlights/17974721576840225/" target="_blank" rel="noopener noreferrer"
+                   class="btn-strict mt-3 inline-flex items-center gap-2 px-3 py-2 font-mono text-[11px] tracking-[0.18em] uppercase">
+                    <i class="fa-brands fa-instagram text-accent"></i><span>[ Більше в Instagram ]</span>
+                </a>
             </div>
-        </section>
-
+        </details>
     </main>
 
     <!-- FOOTER -->
-    <footer class="w-full max-w-6xl mx-auto px-5 sm:px-8 pt-4 pb-6 mt-4 border-t border-strict flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-400 font-mono-tech text-[11px] tracking-[0.2em] uppercase">
+    <footer class="w-full max-w-6xl mx-auto px-5 sm:px-8 pt-4 pb-6 mt-4 border-t border-strict flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-400 font-mono text-[11px] tracking-[0.2em] uppercase">
         <span>VINEYARD UKRAINE</span>
         <div class="flex items-center gap-2">
-            <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Google Диск">
-                <i class="fa-brands fa-google-drive text-xs"></i>
-            </a>
-            <a href="https://andriitab.github.io/personal/" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Особистий сайт">
-                <i class="fa-solid fa-user text-xs"></i>
-            </a>
-            <a href="#about" class="icon-btn" title="Нагору">
-                <i class="fa-solid fa-arrow-up text-xs"></i>
-            </a>
+            <a href="https://drive.google.com/drive/folders/1jm-rLHo0RgsML-RTs6h9MqmzoFyeVzkn" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Google Диск"><i class="fa-brands fa-google-drive text-xs"></i></a>
+            <a href="https://andriitab.github.io/personal/" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Особистий сайт"><i class="fa-solid fa-user text-xs"></i></a>
+            <a href="#about" class="icon-btn" title="Нагору"><i class="fa-solid fa-arrow-up text-xs"></i></a>
         </div>
         <span>© 2026 F.WORSHIP</span>
     </footer>
 
-    <!-- MODAL 1: LIGHTBOX -->
+    <!-- МОДАЛКА: ЛАЙТБОКС -->
     <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" onclick="if(event.target===this) closeLightbox()">
-        <button onclick="closeLightbox()" class="absolute top-5 right-5 icon-btn z-10" aria-label="Закрити">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <div class="max-w-5xl max-h-[88vh] relative flex flex-col items-center">
+        <button onclick="closeLightbox()" class="absolute top-5 right-5 icon-btn z-10" aria-label="Закрити"><i class="fa-solid fa-xmark"></i></button>
+        <div class="max-w-5xl max-h-[88vh] flex flex-col items-center">
             <img id="lightboxImage" src="" alt="Фото" class="max-w-full max-h-[75vh] object-contain border border-strict">
-            <p id="lightboxCaption" class="mt-4 font-mono-tech text-[11px] tracking-[0.2em] uppercase text-zinc-400 text-center"></p>
+            <p id="lightboxCaption" class="mt-4 font-mono text-[11px] tracking-[0.2em] uppercase text-zinc-400 text-center"></p>
         </div>
     </div>
 
-    <!-- MODAL 2: ЧАТ -->
+    <!-- МОДАЛКА: ЧАТ -->
     <div id="messengerModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this) closeMessengerModal()">
         <div class="bg-[#0a0a0a] border border-strict max-w-md w-full text-center">
             <div class="px-5 py-3 border-b border-strict bg-black/50 text-left">
-                <span class="font-mono-tech text-[11px] tracking-[0.2em] uppercase text-zinc-400">ЧАТ // F.WORSHIP</span>
+                <span class="font-mono text-[11px] tracking-[0.2em] uppercase text-zinc-400">ЧАТ // F.WORSHIP</span>
             </div>
             <div class="p-6 space-y-4">
-                <div class="w-14 h-14 border border-accent text-accent flex items-center justify-center mx-auto text-2xl">
-                    <i class="fa-solid fa-comments"></i>
-                </div>
-                <h3 class="font-mono-tech text-sm tracking-[0.15em] uppercase text-white">Робочий чат групи</h3>
+                <div class="w-14 h-14 border border-accent text-accent flex items-center justify-center mx-auto text-2xl"><i class="fa-solid fa-comments"></i></div>
+                <h3 class="font-mono text-sm tracking-[0.15em] uppercase text-white">Робочий чат групи</h3>
                 <p class="text-sm text-zinc-400 leading-relaxed">Розділ "Чат гурту" знаходиться в розробці.</p>
-                <button onclick="closeMessengerModal()" class="btn-accent w-full py-2.5 font-mono-tech text-[11px] tracking-[0.2em] uppercase font-bold">
-                    [ Закрити ]
-                </button>
+                <button onclick="closeMessengerModal()" class="btn-accent w-full py-2.5 font-mono text-[11px] tracking-[0.2em] uppercase font-bold">[ Закрити ]</button>
             </div>
         </div>
     </div>
 
-    <!-- APPLICATION LOGIC (JS) -->
     <script>
         const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzXiVb15oFxKX-abXvHN45YL1QJQanblfWA2mlzWPHrW_zZn1u0nya97A8hPZxEwsBlCg/exec';
         const LOCAL_STORAGE_KEY = 'BAND_REPERTOIRE_LOCAL_CACHE_V1';
         const PHOTOS_STORAGE_KEY = 'BAND_PHOTOS_LOCAL_CACHE_V1';
         const PHOTOS_COUNT = 4;
+        const EMPTY_BOX = 'col-span-full border border-strict bg-black/30 p-6 text-center font-mono text-xs tracking-[0.15em] uppercase text-zinc-400';
 
         let rootData = null;
         let currentFolder = null;
         let galleryItems = [];
 
-        function displayName(name) {
-            return String(name || '').replace(/^[\s!]+/, '');
+        // --- Утиліти ---
+        const $ = id => document.getElementById(id);
+        const displayName = name => String(name || '').replace(/^[\s!]+/, '');
+        const pad2 = n => String(n).padStart(2, '0');
+        const byName = (a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true });
+        const escapeHtml = str => String(str == null ? '' : str)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+        function activateOnKey(e) {
+            if (e.target !== e.currentTarget) return;
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.currentTarget.click(); }
         }
 
-        function escapeHtml(str) {
-            return String(str == null ? '' : str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
+        function setModal(id, show) {
+            $(id).classList.toggle('hidden', !show);
+            document.body.style.overflow = show ? 'hidden' : '';
         }
 
-        function pad2(n) {
-            return String(n).padStart(2, '0');
-        }
-
+        // --- Ініціалізація ---
         document.addEventListener('DOMContentLoaded', () => {
-            window.addEventListener('popstate', (event) => {
-                if (event.state && event.state.folderId) {
-                    let found = findFolderById(rootData, event.state.folderId);
-                    if (found) {
-                        currentFolder = found;
-                        renderCurrentFolder(false);
-                    }
-                } else if (rootData) {
-                    currentFolder = rootData;
-                    renderCurrentFolder(false);
-                }
+            window.addEventListener('popstate', e => {
+                if (!rootData) return;
+                currentFolder = (e.state && e.state.folderId && findFolderById(rootData, e.state.folderId)) || rootData;
+                renderCurrentFolder(false);
             });
 
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeLightbox();
-                    closeMessengerModal();
-                }
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') { closeLightbox(); closeMessengerModal(); }
             });
+
+            // Посилання на згорнуті секції відкривають їх
+            document.querySelectorAll('a[href="#repertoire"], a[href="#gallery"]').forEach(a =>
+                a.addEventListener('click', () => { document.querySelector(a.hash).open = true; }));
 
             fetchRepertoire();
             loadPhotos();
         });
 
+        // --- Репертуар ---
         async function fetchRepertoire() {
-            const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
-            if (localData) {
+            const cached = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (cached) {
                 try {
-                    rootData = JSON.parse(localData);
+                    rootData = JSON.parse(cached);
                     sortDataAlphabetically(rootData);
                     currentFolder = rootData;
                     checkUrlFolderPosition();
                     renderCurrentFolder(false);
                     updateCounters();
-                } catch (e) {
-                    console.error('Помилка читання LocalStorage:', e);
-                }
+                } catch (e) { console.error('Помилка читання LocalStorage:', e); }
             }
 
             try {
-                const response = await fetch(`${GAS_WEB_APP_URL}?refresh=true`);
-                const result = await response.json();
+                const result = await (await fetch(`${GAS_WEB_APP_URL}?refresh=true`)).json();
+                if (result.status !== 'success') return;
 
-                if (result.status === 'success') {
-                    const freshData = result.data;
-                    sortDataAlphabetically(freshData);
-                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(freshData));
-                    rootData = freshData;
-
-                    if (currentFolder && currentFolder.id !== 'root') {
-                        let targetFolder = findFolderById(rootData, currentFolder.id);
-                        currentFolder = targetFolder ? targetFolder : rootData;
-                    } else {
-                        currentFolder = rootData;
-                    }
-
-                    renderCurrentFolder(false);
-                    updateCounters();
-                }
-            } catch (e) {
-                console.error('Помилка фонового оновлення з мережі:', e);
-            }
+                sortDataAlphabetically(result.data);
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(result.data));
+                rootData = result.data;
+                currentFolder = (currentFolder && findFolderById(rootData, currentFolder.id)) || rootData;
+                renderCurrentFolder(false);
+                updateCounters();
+            } catch (e) { console.error('Помилка фонового оновлення з мережі:', e); }
         }
 
         function sortDataAlphabetically(folder) {
-            if (folder.songs && Array.isArray(folder.songs)) {
-                folder.songs.sort((a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true }));
-            }
-            if (folder.subfolders && Array.isArray(folder.subfolders)) {
-                folder.subfolders.sort((a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true }));
-                folder.subfolders.forEach(sub => sortDataAlphabetically(sub));
+            if (Array.isArray(folder.songs)) folder.songs.sort(byName);
+            if (Array.isArray(folder.subfolders)) {
+                folder.subfolders.sort(byName);
+                folder.subfolders.forEach(sortDataAlphabetically);
             }
         }
 
         function checkUrlFolderPosition() {
-            const params = new URLSearchParams(window.location.search);
-            const folderId = params.get('folder');
-            if (folderId && rootData) {
-                let target = findFolderById(rootData, folderId);
-                if (target) currentFolder = target;
+            const folderId = new URLSearchParams(location.search).get('folder');
+            const target = folderId && findFolderById(rootData, folderId);
+            if (target) {
+                currentFolder = target;
+                $('repertoire').open = true;
             }
+        }
+
+        function countAllSongs(folder) {
+            return (folder.songs ? folder.songs.length : 0) +
+                (folder.subfolders || []).reduce((sum, sub) => sum + countAllSongs(sub), 0);
         }
 
         function updateCounters() {
             if (!rootData) return;
-            const totalSongs = countAllSongs(rootData);
-            const totalSections = rootData.subfolders ? rootData.subfolders.length : 0;
-
-            const songElem = document.getElementById('songCount');
-            const sectionElem = document.getElementById('statSectionCount');
-
-            if (songElem) songElem.innerText = totalSongs;
-            if (sectionElem) sectionElem.innerText = totalSections;
+            $('songCount').innerText = countAllSongs(rootData);
+            $('statSectionCount').innerText = rootData.subfolders ? rootData.subfolders.length : 0;
         }
 
-        function countAllSongs(folder) {
-            let count = folder.songs ? folder.songs.length : 0;
-            if (folder.subfolders) {
-                folder.subfolders.forEach(sub => count += countAllSongs(sub));
+        function findFolderById(folder, id) {
+            if (folder.id === id) return folder;
+            for (const sub of folder.subfolders || []) {
+                const found = findFolderById(sub, id);
+                if (found) return found;
             }
-            return count;
+            return null;
         }
 
         function renderCurrentFolder(pushToHistory = true) {
-            const foldersContainer = document.getElementById('foldersContainer');
-            const rootFilesContainer = document.getElementById('rootFilesContainer');
-            const navBar = document.getElementById('navigationBar');
+            const foldersContainer = $('foldersContainer');
+            const rootFilesContainer = $('rootFilesContainer');
+            const isRoot = currentFolder === rootData;
 
-            if (currentFolder === rootData) {
-                navBar.style.display = 'none';
-                if (pushToHistory) {
-                    history.pushState({}, '', window.location.pathname);
-                }
-            } else {
-                navBar.style.display = 'flex';
-                document.getElementById('currentFolderTitle').innerText = displayName(currentFolder.name);
-                if (pushToHistory) {
-                    history.pushState({ folderId: currentFolder.id }, '', `?folder=${currentFolder.id}`);
-                }
+            $('navigationBar').style.display = isRoot ? 'none' : 'flex';
+            if (!isRoot) $('currentFolderTitle').innerText = displayName(currentFolder.name);
+            if (pushToHistory) {
+                isRoot ? history.pushState({}, '', location.pathname)
+                       : history.pushState({ folderId: currentFolder.id }, '', `?folder=${currentFolder.id}`);
             }
 
-            if (currentFolder.subfolders && currentFolder.subfolders.length > 0) {
-                foldersContainer.innerHTML = currentFolder.subfolders.map((sub) => `
-                    <div class="folder-card border border-strict bg-black/30 p-3 cursor-pointer flex items-center gap-3" role="button" tabindex="0" onkeydown="activateOnKey(event)" onclick="openSubfolder('${escapeHtml(sub.id)}')">
-                        <i class="fa-regular fa-folder-open text-accent text-sm shrink-0"></i>
-                        <span class="font-mono-tech text-[11px] tracking-[0.12em] uppercase text-white truncate">${escapeHtml(displayName(sub.name))}</span>
+            const subs = currentFolder.subfolders || [];
+            foldersContainer.innerHTML = subs.map(sub => `
+                <div class="folder-card border border-strict bg-black/30 p-3 cursor-pointer flex items-center gap-3" role="button" tabindex="0" onkeydown="activateOnKey(event)" onclick="openSubfolder('${escapeHtml(sub.id)}')">
+                    <i class="fa-regular fa-folder-open text-accent text-sm shrink-0"></i>
+                    <span class="font-mono text-[11px] tracking-[0.12em] uppercase text-white truncate">${escapeHtml(displayName(sub.name))}</span>
+                </div>`).join('');
+            foldersContainer.style.display = subs.length ? 'grid' : 'none';
+
+            const files = currentFolder.files || [];
+            rootFilesContainer.innerHTML = files.length ? `
+                <div class="p-3 text-center">
+                    <div class="font-mono text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Долучені файли</div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        ${files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-xs"><i class="fa-regular fa-file-lines text-accent"></i>${escapeHtml(f.name)}</a>`).join('')}
                     </div>
-                `).join('');
-                foldersContainer.style.display = 'grid';
-            } else {
-                foldersContainer.innerHTML = '';
-                foldersContainer.style.display = 'none';
-            }
-
-            if (currentFolder.files && currentFolder.files.length > 0) {
-                rootFilesContainer.innerHTML = `
-                    <div class="bg-transparent p-3 text-center">
-                        <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Долучені файли</div>
-                        <div class="flex flex-wrap justify-center gap-2">
-                            ${currentFolder.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-xs"><i class="fa-regular fa-file-lines text-accent"></i>${escapeHtml(f.name)}</a>`).join('')}
-                        </div>
-                    </div>
-                `;
-                rootFilesContainer.style.display = 'block';
-            } else {
-                rootFilesContainer.innerHTML = '';
-                rootFilesContainer.style.display = 'none';
-            }
+                </div>` : '';
+            rootFilesContainer.style.display = files.length ? 'block' : 'none';
 
             renderSongs(currentFolder.songs || []);
         }
 
         function openSubfolder(folderId) {
-            let nextFolder = findFolderById(rootData, folderId);
-            if (nextFolder) {
-                currentFolder = nextFolder;
-                renderCurrentFolder(true);
-            }
-        }
-
-        function goBackFolder() {
-            window.history.back();
+            const next = findFolderById(rootData, folderId);
+            if (next) { currentFolder = next; renderCurrentFolder(true); }
         }
 
         function goToRoot() {
-            if (rootData) {
-                currentFolder = rootData;
-                renderCurrentFolder(true);
-                document.getElementById('searchInput').value = '';
-            }
-        }
-
-        function findFolderById(folder, id) {
-            if (folder.id === id) return folder;
-            if (folder.subfolders) {
-                for (let sub of folder.subfolders) {
-                    let found = findFolderById(sub, id);
-                    if (found) return found;
-                }
-            }
-            return null;
+            if (!rootData) return;
+            currentFolder = rootData;
+            renderCurrentFolder(true);
+            $('searchInput').value = '';
         }
 
         function renderSongs(songs) {
-            const container = document.getElementById('songList');
-            if (!songs || songs.length === 0) {
-                if (!currentFolder.subfolders || currentFolder.subfolders.length === 0) {
-                    container.innerHTML = '<div class="text-center p-5 text-xs text-zinc-400 font-mono-tech tracking-[0.15em] uppercase">Папка порожня</div>';
-                } else {
-                    container.innerHTML = '';
-                }
+            const container = $('songList');
+            if (!songs.length) {
+                const noSubs = !currentFolder.subfolders || !currentFolder.subfolders.length;
+                container.innerHTML = noSubs
+                    ? '<div class="text-center p-5 text-xs text-zinc-400 font-mono tracking-[0.15em] uppercase">Папка порожня</div>'
+                    : '';
                 return;
             }
 
             container.innerHTML = songs.map((song, index) => {
-                let songFilesHtml = '';
-                if (song.files && song.files.length > 0) {
-                    songFilesHtml = `
-                        <div class="bg-transparent p-2.5 text-center">
-                            <div class="font-mono-tech text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Матеріали треку</div>
-                            <div class="flex flex-wrap justify-center gap-2">
-                                ${song.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-[11px]"><i class="fa-solid fa-music text-accent text-[11px]"></i>${escapeHtml(f.name)}</a>`).join('')}
-                            </div>
+                const filesHtml = song.files && song.files.length ? `
+                    <div class="p-2.5 text-center">
+                        <div class="font-mono text-[11px] tracking-[0.2em] text-zinc-400 uppercase mb-2">Матеріали треку</div>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            ${song.files.map(f => `<a href="${escapeHtml(f.driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-strict inline-flex items-center gap-2 px-2.5 py-1 text-[11px]"><i class="fa-solid fa-music text-accent text-[11px]"></i>${escapeHtml(f.name)}</a>`).join('')}
                         </div>
-                    `;
-                }
+                    </div>` : '';
 
                 const keyBadge = song.key
-                    ? `<span class="font-mono-tech text-[11px] font-bold text-accent border border-accent/40 px-2 py-0.5 shrink-0">${escapeHtml(song.key)}</span>`
+                    ? `<span class="font-mono text-[11px] font-bold text-accent border border-accent/40 px-2 py-0.5 shrink-0">${escapeHtml(song.key)}</span>`
                     : '';
 
                 return `
                     <div class="song-item">
                         <div class="song-row px-4 py-3 flex items-center justify-between gap-3 cursor-pointer" role="button" tabindex="0" onkeydown="activateOnKey(event)" onclick="toggleSong(${index})">
                             <div class="flex items-center gap-3 min-w-0 flex-1">
-                                <span class="font-mono-tech text-[11px] text-zinc-400 shrink-0 w-6">${pad2(index + 1)}</span>
+                                <span class="font-mono text-[11px] text-zinc-400 shrink-0 w-6">${pad2(index + 1)}</span>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="text-xs sm:text-sm font-semibold text-white truncate">${escapeHtml(displayName(song.name))}</h4>
-                                    <span class="font-mono-tech text-[11px] tracking-[0.15em] uppercase text-zinc-400 block mt-0.5">${song.chords ? 'Акорди є' : 'Текст'}</span>
+                                    <span class="font-mono text-[11px] tracking-[0.15em] uppercase text-zinc-400 block mt-0.5">${song.chords ? 'Акорди є' : 'Текст'}</span>
                                 </div>
                             </div>
-
                             <div class="flex items-center gap-2 shrink-0">
                                 ${keyBadge}
                                 <a href="${escapeHtml(song.driveUrl)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="icon-btn !w-8 !h-8" title="Відкрити на Диску">
@@ -640,60 +483,41 @@
                                 </span>
                             </div>
                         </div>
-
                         <div class="song-body hidden bg-black/45 border-t border-strict px-4 py-4 text-xs space-y-3" id="song-body-${index}">
-                            ${songFilesHtml}
-                            <div class="font-mono-tech text-xs text-zinc-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(song.chords || song.text || 'Немає текстового вмісту')}</div>
+                            ${filesHtml}
+                            <div class="font-mono text-xs text-zinc-200 whitespace-pre-wrap leading-relaxed">${escapeHtml(song.chords || song.text || 'Немає текстового вмісту')}</div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }).join('');
         }
 
-        function activateOnKey(e) {
-            if (e.target !== e.currentTarget) return;
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                e.currentTarget.click();
-            }
-        }
-
         function toggleSong(index) {
-            const body = document.getElementById(`song-body-${index}`);
-            const item = body.closest('.song-item');
-            item.classList.toggle('active');
+            const body = $(`song-body-${index}`);
+            body.closest('.song-item').classList.toggle('active');
             body.classList.toggle('hidden');
         }
 
         function handleSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            if (!query) {
-                renderCurrentFolder(false);
-                return;
-            }
+            const query = $('searchInput').value.toLowerCase();
+            if (!query) { renderCurrentFolder(false); return; }
 
-            document.getElementById('foldersContainer').style.display = 'none';
-            document.getElementById('rootFilesContainer').style.display = 'none';
-            document.getElementById('navigationBar').style.display = 'none';
+            ['foldersContainer', 'rootFilesContainer', 'navigationBar'].forEach(id => $(id).style.display = 'none');
 
-            let allSongsList = [];
-            collectAllSongs(rootData, allSongsList);
-
-            const filtered = allSongsList.filter(s =>
+            const all = [];
+            collectAllSongs(rootData, all);
+            renderSongs(all.filter(s =>
                 s.name.toLowerCase().includes(query) ||
                 (s.chords && s.chords.toLowerCase().includes(query)) ||
                 (s.key && s.key.toLowerCase().includes(query))
-            ).sort((a, b) => a.name.localeCompare(b.name, 'uk', { sensitivity: 'accent', numeric: true }));
-
-            renderSongs(filtered);
+            ).sort(byName));
         }
 
         function collectAllSongs(folder, list) {
-            if (folder.songs) folder.songs.forEach(s => list.push(s));
-            if (folder.subfolders) folder.subfolders.forEach(sub => collectAllSongs(sub, list));
+            (folder.songs || []).forEach(s => list.push(s));
+            (folder.subfolders || []).forEach(sub => collectAllSongs(sub, list));
         }
 
-        // --- ЛОГІКА ФОТОАЛЬБОМУ (4 випадкові фото) ---
+        // --- Фотоальбом (Google Диск) ---
         function shuffle(arr) {
             const a = arr.slice();
             for (let i = a.length - 1; i > 0; i--) {
@@ -704,123 +528,67 @@
         }
 
         function drivePhotosToItems(list) {
-            return shuffle(list).slice(0, PHOTOS_COUNT).map(p => {
-                const id = p.id;
-                const thumb = p.thumbUrl || (id ? `https://lh3.googleusercontent.com/d/${id}=w600` : '');
-                const full = p.url || (id ? `https://lh3.googleusercontent.com/d/${id}=w1200` : '');
-                const caption = String(p.name || '').replace(/\.[^.]+$/, '');
-                return { thumb, full, caption: caption || 'Фото гурту' };
-            });
+            return shuffle(list).slice(0, PHOTOS_COUNT).map(p => ({
+                thumb: p.thumbUrl || (p.id ? `https://lh3.googleusercontent.com/d/${p.id}=w600` : ''),
+                full: p.url || (p.id ? `https://lh3.googleusercontent.com/d/${p.id}=w1200` : ''),
+                caption: String(p.name || '').replace(/\.[^.]+$/, '') || 'Фото гурту'
+            }));
         }
 
         function renderGallery(items) {
             galleryItems = items;
-            const grid = document.getElementById('galleryGrid');
-            if (!grid) return;
-
-            if (!items || items.length === 0) {
-                grid.innerHTML = '<div class="col-span-full border border-strict bg-black/30 p-6 text-center font-mono-tech text-xs tracking-[0.15em] uppercase text-zinc-400">Фотографії не знайдено</div>';
-                return;
-            }
-
-            grid.innerHTML = items.map((p, i) => `
+            $('galleryGrid').innerHTML = items.length ? items.map((p, i) => `
                 <div class="photo-card aspect-video w-full relative overflow-hidden bg-black border border-strict cursor-pointer group"
-                     role="button" tabindex="0" onkeydown="activateOnKey(event)" onclick="openPhoto(${i})">
+                     role="button" tabindex="0" onkeydown="activateOnKey(event)" onclick="openLightbox(galleryItems[${i}].full, galleryItems[${i}].caption)">
                     <img src="${escapeHtml(p.thumb)}" alt="${escapeHtml(p.caption)}" loading="lazy" class="w-full h-full object-cover">
-                    <div class="absolute inset-x-0 bottom-0 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent flex items-center justify-between">
-                        
-                        <span class="font-mono-tech text-[9px] tracking-[0.1em] text-accent opacity-0 group-hover:opacity-100 transition-opacity">[ Збільшити ]</span>
-                    </div>
-                </div>
-            `).join('');
+                    <span class="absolute bottom-2 right-3 font-mono text-[9px] tracking-[0.1em] text-accent opacity-0 group-hover:opacity-100 transition-opacity">[ Збільшити ]</span>
+                </div>`).join('')
+                : `<div class="${EMPTY_BOX}">Фотографії поки не знайдено в папці.</div>`;
         }
 
         async function loadPhotos() {
-            let rendered = false;
             try {
                 const cached = JSON.parse(localStorage.getItem(PHOTOS_STORAGE_KEY) || '[]');
-                if (Array.isArray(cached) && cached.length) {
-                    renderGallery(drivePhotosToItems(cached));
-                    rendered = true;
-                }
-            } catch (e) {
-                console.error('Помилка кешу фото:', e);
-            }
+                if (cached.length) renderGallery(drivePhotosToItems(cached));
+            } catch (e) { console.error('Помилка кешу фото:', e); }
 
             try {
-                const response = await fetch(`${GAS_WEB_APP_URL}?action=photos`);
-                const result = await response.json();
-
+                const result = await (await fetch(`${GAS_WEB_APP_URL}?action=photos`)).json();
                 if (result.status === 'success' && Array.isArray(result.data) && result.data.length) {
                     localStorage.setItem(PHOTOS_STORAGE_KEY, JSON.stringify(result.data));
-                    if (!rendered) {
-                        renderGallery(drivePhotosToItems(result.data));
-                        rendered = true;
-                    }
+                    if (!galleryItems.length) renderGallery(drivePhotosToItems(result.data));
                 }
-            } catch (e) {
-                console.error('Помилка мережі для фото:', e);
-            }
+            } catch (e) { console.error('Помилка мережі для фото:', e); }
 
-            if (!rendered) {
-                const grid = document.getElementById('galleryGrid');
-                if (grid) {
-                    grid.innerHTML = '<div class="col-span-full border border-strict bg-black/30 p-6 text-center font-mono-tech text-xs tracking-[0.15em] uppercase text-zinc-400">Фотографії поки не знайдено в папці.</div>';
-                }
-            }
+            if (!galleryItems.length) renderGallery([]);
         }
 
-        function openPhoto(i) {
-            const p = galleryItems[i];
-            if (p) openLightbox(p.full, p.caption);
+        // --- Модалки ---
+        function openLightbox(src, caption) {
+            $('lightboxImage').src = src;
+            $('lightboxCaption').textContent = caption || '';
+            setModal('lightboxModal', true);
         }
+        const closeLightbox = () => setModal('lightboxModal', false);
+        function openMessengerModal(e) { e.preventDefault(); setModal('messengerModal', true); }
+        const closeMessengerModal = () => setModal('messengerModal', false);
 
-        function openLightbox(imageSrc, caption) {
-            document.getElementById('lightboxImage').src = imageSrc;
-            document.getElementById('lightboxCaption').textContent = caption || '';
-            document.getElementById('lightboxModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightboxModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function openMessengerModal(e) {
-            e.preventDefault();
-            document.getElementById('messengerModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMessengerModal() {
-            document.getElementById('messengerModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const siteHeader = document.getElementById('siteHeader');
+        // --- Хедер і мобільне меню ---
+        const mobileMenu = $('mobileMenu');
+        const siteHeader = $('siteHeader');
 
         function updateHeaderState() {
-            const menuOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
-            siteHeader.classList.toggle('header-solid', window.scrollY > 8 || menuOpen);
+            siteHeader.classList.toggle('header-solid', window.scrollY > 8 || !mobileMenu.classList.contains('hidden'));
         }
         window.addEventListener('scroll', updateHeaderState, { passive: true });
         updateHeaderState();
 
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                updateHeaderState();
-            });
-            mobileMenu.querySelectorAll('a[href^="#"]').forEach(a => {
-                a.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    updateHeaderState();
-                });
-            });
-        }
+        $('mobileMenuBtn').addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            updateHeaderState();
+        });
+        mobileMenu.querySelectorAll('a[href^="#"]').forEach(a =>
+            a.addEventListener('click', () => { mobileMenu.classList.add('hidden'); updateHeaderState(); }));
     </script>
 </body>
 </html>
